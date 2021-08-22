@@ -5,7 +5,7 @@
 #include "shapes.h"
 #include <cmath>
 using namespace SDL;
-
+using namespace Shapes;
 
 
 Vector Object::GetPosition() const {

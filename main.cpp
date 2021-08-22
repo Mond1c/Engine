@@ -1,8 +1,9 @@
 #include "settings.h"
 #include "Render/window.h"
-#include "Rectangles/shapes.h"
+#include "Objects/shapes.h"
 #include "Render/event.h"
 using namespace SDL;
+using namespace Shapes;
 
 const float a = 1;
 const float b = -4;

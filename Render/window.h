@@ -5,7 +5,7 @@
 #ifndef _window_h_
 #define _window_h_
 
-#include "../Rectangles/shapes.h"
+#include "../Objects/shapes.h"
 #include <SDL2/SDL.h>
 
 namespace SDL {
