@@ -31,6 +31,10 @@ void Renderer::Update() {
 	SDL_RenderPresent(renderer_);
 }
 
+SDL_Renderer* Renderer::Ptr() {
+	return renderer_;
+}
+
 Window::Window(const char* title, const Vector& position, const Vector& size, Uint32 flags) noexcept {
 	window_ = SDL_CreateWindow(title, position.x, position.y, size.x, size.y, flags);
 }

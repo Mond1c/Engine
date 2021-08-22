@@ -9,11 +9,6 @@
 #include <SDL2/SDL.h>
 
 namespace SDL {
-	struct Color {
-		Uint8 r, g, b, a;
-		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) :
-			r(r), g(g), b(b), a(a) {}
-	};
 	
 	class Renderer {
 	public:
@@ -24,6 +19,8 @@ namespace SDL {
 		void Draw(const Object& object);
 		void Clear();
 		void Update();
+		
+		SDL_Renderer* Ptr();
 	private:
 		SDL_Renderer* renderer_;
 		Color color_;
