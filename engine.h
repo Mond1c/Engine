@@ -15,12 +15,16 @@
 class Engine {
 public:
 	Engine();
+	~Engine() {
+		for (SDL::Object* object : objects) delete object;
+		for (Physics::ICollider* collider : colliders) delete collider;
+	}
 	
 	void Start();
 	void Update();
 private:
-	std::vector<SDL::Object> objects;
-	std::vector<Physics::ICollider> colliders;
+	std::vector<SDL::Object*> objects;
+	std::vector<Physics::ICollider*> colliders;
 	
 	SDL::Window window;
 	SDL::Renderer renderer;

@@ -20,21 +20,22 @@ SDL::Vector ICollider::GetSpeed() const {
 
 void ICollider::SetSpeed(const SDL::Vector& speed) {
 	speed_ = speed;
-	speed_.y += GRAVITY;
 }
 
-void ICollider::Update(std::vector<ICollider>& objects) {
-	for (ICollider& collider : objects) {
-		if (this != &collider && DetectCollision(*this, collider)) {
-			speed_.x = ((mass_ - collider.mass_) * speed_.x + 2 * collider.mass_ * collider.speed_.x) / (mass_ + collider.mass_);
-			speed_.y = ((mass_ - collider.mass_) * speed_.y + 2 * collider.mass_ * collider.speed_.y) / (mass_ + collider.mass_);
+void ICollider::Update(std::vector<ICollider*>& objects) {
+	for (ICollider* collider : objects) {
+		if (this != collider && DetectCollision(*this, *collider)) {
+			speed_.x = ((mass_ - collider->mass_) * speed_.x + 2 * collider->mass_ * collider->speed_.x) / (mass_ + collider->mass_);
+			speed_.y = ((mass_ - collider->mass_) * speed_.y + 2 * collider->mass_ * collider->speed_.y) / (mass_ + collider->mass_);
 			
-			collider.speed_.x = ((collider.mass_ - mass_) * collider.speed_.x + 2 * mass_ * speed_.x) / (mass_ + collider.mass_);
-			collider.speed_.y = ((collider.mass_ - mass_) * collider.speed_.y + 2 * mass_ * speed_.y) / (mass_ + collider.mass_);
+			collider->speed_.x = ((collider->mass_ - mass_) * collider->speed_.x + 2 * mass_ * speed_.x) / (mass_ + collider->mass_);
+			collider->speed_.y = ((collider->mass_ - mass_) * collider->speed_.y + 2 * mass_ * speed_.y) / (mass_ + collider->mass_);
 		}
 	}
 	
 	position_ += speed_;
+	position_.y += GRAVITY * mass_;
+	object_.SetPosition(position_);
 }
 
 namespace {

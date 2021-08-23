@@ -16,7 +16,7 @@ namespace SDL {
 		~Renderer();
 		
 		void SetColor(const Color& color);
-		void Draw(const Object& object);
+		void Draw(Object& object);
 		void Clear();
 		void Update();
 		

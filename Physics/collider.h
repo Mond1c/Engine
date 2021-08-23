@@ -15,9 +15,9 @@ namespace Physics {
 	public:
 		ICollider(const SDL::Vector& position, const SDL::Vector& size, SDL::Object& object, double mass) :
 			position_(position), size_(size), object_(object), mass_(mass), speed_({0, 0}) {}
-		virtual ~ICollider();
+		virtual ~ICollider() {}
 		
-		void Update(std::vector<ICollider>& objects);
+		void Update(std::vector<ICollider*>& objects);
 		
 		SDL::Vector GetPosition() const;
 		SDL::Vector GetSize() const;
@@ -38,18 +38,21 @@ namespace Physics {
 		public:
 			Rect(const SDL::Vector& position, const SDL::Vector& size, SDL::Shapes::Rect& object, double mass) :
 				ICollider(position, size, object, mass) {}
+			~Rect() {}
 		};
 		
 		class Circle : public ICollider {
 		public:
 			Circle(const SDL::Vector& position, const SDL::Vector& size, SDL::Shapes::Circle& object, double mass) :
 				ICollider(position, size, object, mass) {}
+			~Circle() {}
 		};
 		
 		class Circumference : public ICollider {
 		public:
 			Circumference(const SDL::Vector& position, const SDL::Vector& size, SDL::Shapes::Circumference& object, double mass) :
 				ICollider(position, size, object, mass) {}
+			~Circumference() {}
 		};
 	}
 	

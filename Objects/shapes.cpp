@@ -20,15 +20,17 @@ void Object::SetPosition(const Vector& position) {
 	position_ = position;
 }
 
-void Point::Draw(SDL_Renderer* renderer) const {
+void Point::Draw(SDL_Renderer* renderer) {
 	SDL_RenderDrawPointF(renderer, position_.x, position_.y);
 }
 
-void Line::Draw(SDL_Renderer* renderer) const {
+void Line::Draw(SDL_Renderer* renderer) {
 	SDL_RenderDrawLineF(renderer, position_.x, position_.y, finish.x, finish.y);
 }
 
-void Rect::Draw(SDL_Renderer* renderer) const {
+void Rect::Draw(SDL_Renderer* renderer) {
+	rect_ = {position_.x, position_.y, position_.x + size.x, position_.y + size.y};
+	Fill(renderer);
 	SDL_RenderDrawRectF(renderer, &rect_);
 }
 
@@ -36,7 +38,7 @@ void Rect::Fill(SDL_Renderer* renderer) {
 	SDL_RenderFillRectF(renderer, &rect_);
 }
 
-void Circle::Draw(SDL_Renderer* renderer) const {
+void Circle::Draw(SDL_Renderer* renderer) {
 	for (float y = position_.y - size.x; y < position_.y + size.x; ++y) {
 		for (float x = position_.x - size.x; x < position_.x + size.x; ++x) {
 			if ((position_.x - x)*(position_.x - x) + (position_.y - y)*(position_.y - y) <= 
@@ -47,7 +49,7 @@ void Circle::Draw(SDL_Renderer* renderer) const {
 	}
 }
 
-void Circumference::Draw(SDL_Renderer* renderer) const {
+void Circumference::Draw(SDL_Renderer* renderer) {
 	float CircumferenceSize = size.x / 5;
 	
 	for (float y = position_.y - size.x; y < position_.y + size.x; ++y) {
@@ -73,7 +75,7 @@ namespace {
 	}
 }
 
-void Trinagle::Draw(SDL_Renderer* renderer) const {	
+void Trinagle::Draw(SDL_Renderer* renderer) {	
 	float start_x = std::fminf(position_.x, std::fminf(second_point_.x, third_point_.x));
 	float start_y = std::fminf(position_.y, std::fminf(second_point_.y, third_point_.y));
 	float finish_x = std::fmaxf(position_.x, std::fmaxf(second_point_.x, third_point_.x));

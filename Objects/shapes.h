@@ -8,6 +8,7 @@
 
 #include "vector.h"
 #include <SDL2/SDL.h>
+#include <iostream>
 
 
 namespace SDL {	
@@ -31,7 +32,7 @@ namespace SDL {
 		
 		void SetPosition(const Vector& position);
 		
-		virtual void Draw(SDL_Renderer* renderer) const = 0;
+		virtual void Draw(SDL_Renderer* renderer) = 0;
 	protected:
 		Vector position_;
 		Vector size;
@@ -45,7 +46,7 @@ namespace SDL {
 			Object(position, {1, 1}) {}
 			~Point() {}
 			
-			void Draw(SDL_Renderer* renderer) const override;
+			void Draw(SDL_Renderer* renderer) override;
 		};
 		
 		class Line : public Object {
@@ -53,7 +54,7 @@ namespace SDL {
 			Line(const Vector& start, const Vector& finish) : Object(start, {finish.x - start.x, 1}), finish(finish) {}
 			~Line() {}
 			
-			void Draw(SDL_Renderer* renderer) const override;
+			void Draw(SDL_Renderer* renderer) override;
 		private:
 			Vector finish;
 		};
@@ -65,7 +66,7 @@ namespace SDL {
 			}
 			~Rect() {}
 			
-			void Draw(SDL_Renderer* renderer) const override;
+			void Draw(SDL_Renderer* renderer) override;
 			void Fill(SDL_Renderer* renderer);
 		private:
 			SDL_FRect rect_;
@@ -76,7 +77,7 @@ namespace SDL {
 			Circle(const Vector& position, const Vector& size) : Object(position, size) {}
 			~Circle() {}
 			
-			void Draw(SDL_Renderer* renderer) const override;
+			void Draw(SDL_Renderer* renderer) override;
 		};
 		
 		class Circumference : public Object {
@@ -84,7 +85,7 @@ namespace SDL {
 			Circumference(const Vector& position, const Vector& size) : Object(position, size) {}
 			~Circumference() {}
 			
-			void Draw(SDL_Renderer* renderer) const override;
+			void Draw(SDL_Renderer* renderer) override;
 		};
 		
 		class Trinagle : public Object {
@@ -93,7 +94,7 @@ namespace SDL {
 			Object(first_point, {0, 0}), second_point_(second_point), third_point_(third_point) {}
 			~Trinagle() {}
 			
-			void Draw(SDL_Renderer* renderer) const override;
+			void Draw(SDL_Renderer* renderer) override;
 		private:
 			Vector second_point_;
 			Vector third_point_;

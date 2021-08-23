@@ -14,7 +14,7 @@ Renderer::~Renderer() {
 	SDL_DestroyRenderer(renderer_);
 }
 
-void Renderer::Draw(const Object& object) {
+void Renderer::Draw(Object& object) {
 	object.Draw(renderer_);
 }
 
