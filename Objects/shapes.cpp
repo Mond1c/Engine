@@ -24,8 +24,17 @@ void Point::Draw(SDL_Renderer* renderer) {
 	SDL_RenderDrawPointF(renderer, position_.x, position_.y);
 }
 
+std::string Point::GetString() const {
+	return "type=point\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n';
+}
+
 void Line::Draw(SDL_Renderer* renderer) {
 	SDL_RenderDrawLineF(renderer, position_.x, position_.y, finish.x, finish.y);
+}
+
+std::string Line::GetString() const {
+	return  "type=line\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n'
+			+ "position=" + std::to_string(finish.x) + "," + std::to_string(finish.y) + '\n';	
 }
 
 void Rect::Draw(SDL_Renderer* renderer) {
@@ -38,6 +47,11 @@ void Rect::Fill(SDL_Renderer* renderer) {
 	SDL_RenderFillRectF(renderer, &rect_);
 }
 
+std::string Rect::GetString() const {
+	return  "type=rect\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n' +
+			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + '\n';
+}
+
 void Circle::Draw(SDL_Renderer* renderer) {
 	for (float y = position_.y - size.x; y < position_.y + size.x; ++y) {
 		for (float x = position_.x - size.x; x < position_.x + size.x; ++x) {
@@ -47,6 +61,11 @@ void Circle::Draw(SDL_Renderer* renderer) {
 			}
 		}
 	}
+}
+
+std::string Circle::GetString() const {
+	return  "type=circle\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + "\n" +
+			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + "\n";
 }
 
 void Circumference::Draw(SDL_Renderer* renderer) {
@@ -61,6 +80,11 @@ void Circumference::Draw(SDL_Renderer* renderer) {
 				}
 		}
 	}
+}
+
+std::string Circumference::GetString() const {
+	return  "type=circumference\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + "\n" +
+			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + "\n";
 }
 
 namespace {
@@ -92,4 +116,10 @@ void Trinagle::Draw(SDL_Renderer* renderer) {
 			}
 		}
 	}
+}
+
+std::string Trinagle::GetString() const {
+	return  "type=trinagle\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n'
+			+ "position=" + std::to_string(second_point_.x) + "," + std::to_string(second_point_.y) + '\n' 
+			+ "position=" + std::to_string(third_point_.x) + "," + std::to_string(third_point_.y) + '\n';	
 }

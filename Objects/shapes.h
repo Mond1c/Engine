@@ -33,6 +33,7 @@ namespace SDL {
 		void SetPosition(const Vector& position);
 		
 		virtual void Draw(SDL_Renderer* renderer) = 0;
+		virtual std::string GetString() const = 0;
 	protected:
 		Vector position_;
 		Vector size;
@@ -47,6 +48,7 @@ namespace SDL {
 			~Point() {}
 			
 			void Draw(SDL_Renderer* renderer) override;
+			std::string GetString() const override;
 		};
 		
 		class Line : public Object {
@@ -55,6 +57,7 @@ namespace SDL {
 			~Line() {}
 			
 			void Draw(SDL_Renderer* renderer) override;
+			std::string GetString() const override;
 		private:
 			Vector finish;
 		};
@@ -68,6 +71,8 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			void Fill(SDL_Renderer* renderer);
+			
+			std::string GetString() const override;
 		private:
 			SDL_FRect rect_;
 		};
@@ -78,6 +83,7 @@ namespace SDL {
 			~Circle() {}
 			
 			void Draw(SDL_Renderer* renderer) override;
+			std::string GetString() const override;
 		};
 		
 		class Circumference : public Object {
@@ -86,6 +92,7 @@ namespace SDL {
 			~Circumference() {}
 			
 			void Draw(SDL_Renderer* renderer) override;
+			std::string GetString() const override;
 		};
 		
 		class Trinagle : public Object {
@@ -95,6 +102,7 @@ namespace SDL {
 			~Trinagle() {}
 			
 			void Draw(SDL_Renderer* renderer) override;
+			std::string GetString() const override;
 		private:
 			Vector second_point_;
 			Vector third_point_;

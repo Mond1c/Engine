@@ -12,15 +12,12 @@
 namespace SDL {
 	class File {
 	public:
-		File(const char* file_name) : file(std::fstream(file_name)) {}
-		~File() {
-			file.close();
-		}
+		File(const char* file_name) : file_name_(file_name) {}
 		
 		std::vector<SDL::Object*> Load();
-		//void Save(std::vector<SDL::Object*> objects);
+		void Save(std::vector<SDL::Object*> objects);
 	private:
-		std::fstream file;
+		const char* file_name_;
 	};
 }
 

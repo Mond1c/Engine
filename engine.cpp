@@ -13,8 +13,10 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	renderer.SetColor(SDL::Color(0, 0, 0));
 	SDL::File file("Object.object");
 	objects = file.Load();
-	for (SDL::Object* obj : objects) renderer.Draw(*obj);
+	for (SDL::Object* obj : objects) if (obj) renderer.Draw(*obj);
 	renderer.Update();
+	SDL::File file2("test.object");
+	file2.Save(objects);
 }
 
 void Engine::Update() { // Gameplay and Physics
