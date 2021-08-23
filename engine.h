@@ -12,6 +12,7 @@
 #include "Parser/file.h"
 
 #include <vector>
+#include <memory>
 
 class Engine {
 public:
@@ -19,6 +20,14 @@ public:
 	~Engine() {
 		for (SDL::Object* object : objects) delete object;
 		for (Physics::ICollider* collider : colliders) delete collider;
+	}
+	
+	void CreateObject(SDL::Object* object) {
+		objects.push_back(object);
+	}
+	
+	void CreateCollider(Physics::ICollider* collider) {
+		colliders.push_back(collider);
 	}
 	
 	void Start();
