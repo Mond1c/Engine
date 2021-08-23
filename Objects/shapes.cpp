@@ -16,6 +16,9 @@ Vector Object::GetSize() const {
 	return size;
 }
 
+void Object::SetPosition(const Vector& position) {
+	position_ = position;
+}
 
 void Point::Draw(SDL_Renderer* renderer) const {
 	SDL_RenderDrawPointF(renderer, position_.x, position_.y);

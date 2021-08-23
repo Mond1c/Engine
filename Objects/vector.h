@@ -13,4 +13,22 @@ namespace SDL {
 		Vector(float x, float y) :
 			x(x), y(y) {}
 	};
+	
+	inline Vector operator+(const Vector& v1, const Vector& v2) {
+		return Vector(v1.x + v2.x, v1.y + v2.y);
+	}
+	
+	inline Vector operator-(const Vector& v1, const Vector& v2) {
+		return Vector(v1.x - v2.x, v1.y - v2.y);
+	}
+	
+	inline Vector& operator+=(Vector& v1, const Vector& v2) {
+		v1.x += v2.x; v1.y += v2.y;
+		return v1;
+	}
+	
+	inline Vector& operator-=(Vector& v1, const Vector& v2) {
+		v1.x -= v2.x; v1.y -= v2.y;
+		return v1;
+	}
 }

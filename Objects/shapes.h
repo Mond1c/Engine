@@ -13,8 +13,9 @@
 namespace SDL {	
 	struct Color {
 		Uint8 r, g, b, a;
+		Color() : r(0), g(0), b(0), a(255) {}
 		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) :
-		r(r), g(g), b(b), a(a) {}
+			r(r), g(g), b(b), a(a) {}
 	};
 	
 	class Object {
@@ -27,6 +28,8 @@ namespace SDL {
 		
 		Vector GetPosition() const;
 		Vector GetSize() const;
+		
+		void SetPosition(const Vector& position);
 		
 		virtual void Draw(SDL_Renderer* renderer) const = 0;
 	protected:
