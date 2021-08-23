@@ -11,8 +11,9 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	renderer.SetColor(SDL::Color(225, 255, 255));
 	renderer.Clear();
 	renderer.SetColor(SDL::Color(0, 0, 0));
-	SDL::Object* obj = SDL::Parser::Parse("Object.object");
-	renderer.Draw(*obj);
+	SDL::File file("Object.object");
+	objects = file.Load();
+	for (SDL::Object* obj : objects) renderer.Draw(*obj);
 	renderer.Update();
 }
 

@@ -6,13 +6,12 @@
 #include <iostream>
 using namespace SDL;
 
-Object* Parser::Parse(const char* file_name) {
-	std::ifstream file(file_name);
+Object* Parser::Parse(std::stringstream& stream) {
 	std::string str;
 	std::string type;
 	Vector position(0, 0), size(0, 0), second_point(0, 0), third_point(0, 0);
 	int state = 0;
-	while (file >> str) {
+	while (stream >> str) {
 		std::vector<std::string> elements = Split(str);
 		if (elements[0] == "position" && state == 0) {
 			position = Vector(std::stof(elements[1]), std::stof(elements[2]));

@@ -8,8 +8,8 @@
 #include "settings.h"
 #include "Render/window.h"
 #include "Render/event.h"
-#include "Parser/object_parser.h"
 #include "Physics/collider.h"
+#include "Parser/file.h"
 
 #include <vector>
 
