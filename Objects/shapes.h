@@ -27,6 +27,7 @@ namespace SDL {
 			
 		}
 		
+		
 		Vector GetPosition() const;
 		Vector GetSize() const;
 		

@@ -15,6 +15,29 @@ namespace SDL {
 		explicit Renderer(SDL_Window* window, int index, Uint32 flags) noexcept;
 		~Renderer();
 		
+		Renderer(const Renderer&) = delete;
+		Renderer(Renderer&& other) {
+			if (this != &other) {
+				if (renderer_) SDL_DestroyRenderer(renderer_);
+				renderer_ = other.renderer_;
+				other.renderer_ = nullptr;
+				color_ = other.color_;
+				other.color_ = Color();
+			}
+		}
+		
+		Renderer& operator=(const Renderer&) = delete;
+		Renderer& operator=(Renderer&& other) {
+			if (this != &other) {
+				if (renderer_) SDL_DestroyRenderer(renderer_);
+				renderer_ = other.renderer_;
+				other.renderer_ = nullptr;
+				color_ = other.color_;
+				other.color_ = Color();
+			}
+			return *this;
+		}
+		
 		void SetColor(const Color& color);
 		void Draw(Object& object);
 		void Clear();
@@ -29,6 +52,25 @@ namespace SDL {
 	class Window {
 	public:
 		explicit Window(const char* title, const Vector& position, const Vector& size, Uint32 flags) noexcept;
+		
+		Window(const Window&) = delete;
+		Window(Window&& other) {
+			if (this != &other) {
+				if (window_) SDL_DestroyWindow(window_);
+				window_ = other.window_;
+				other.window_ = nullptr;
+			}
+		}
+		
+		Window& operator=(const Window&) = delete;
+		Window& operator=(Window&& other) {
+			if (this != &other) {
+				if (window_) SDL_DestroyWindow(window_);
+				window_ = other.window_;
+				other.window_ = nullptr;
+			}
+			return *this;
+		}
 		
 		SDL_Window* Ptr();
 		

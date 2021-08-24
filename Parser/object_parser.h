@@ -12,6 +12,13 @@
 namespace SDL {
 	class Parser {
 	public:
+		Parser() = delete;
+		Parser(const Parser&) = delete;
+		Parser(Parser&&) = delete;
+		
+		Parser& operator=(const Parser&) = delete;
+		Parser& operator=(Parser&&) = delete;
+		
 		static SDL::Object* Parse(std::stringstream& stream);
 		static std::vector<std::string> Split(const std::string& str);
 	};

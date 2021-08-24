@@ -80,6 +80,12 @@ namespace SDL {
 		Event() = default;
 		bool PollEvent();
 		
+		Event(const Event&) = delete;
+		Event(Event&&) = delete;
+		
+		Event& operator=(const Event&) = delete;
+		Event& operator=(Event&&) = delete;
+		
 		Uint32 Type() const;
 	private:
 		SDL_Event event_;

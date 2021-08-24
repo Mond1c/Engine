@@ -22,6 +22,12 @@ public:
 		for (Physics::ICollider* collider : colliders) delete collider;
 	}
 	
+	Engine(const Engine&) = delete;
+	Engine(Engine&&) = delete;
+	
+	Engine& operator=(const Engine&) = delete;
+	Engine& operator=(Engine&&) = delete;
+	
 	void CreateObject(SDL::Object* object) {
 		objects.push_back(object);
 	}

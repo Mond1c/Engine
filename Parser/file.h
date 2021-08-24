@@ -14,6 +14,11 @@ namespace SDL {
 	class File {
 	public:
 		File(const char* file_name) : file_name_(file_name) {}
+		File(const File&) = delete;
+		File(File&&) = delete;
+		
+		File& operator=(const File&) = delete;
+		File& operator=(File&&) = delete;
 		
 		std::vector<SDL::Object*> Load();
 		void Save(std::vector<SDL::Object*> objects);

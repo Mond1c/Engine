@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
 		}
 		SDL::Delay(DELAY);
 	}
+
 	SDL_Quit();
 	return 0;
 }
