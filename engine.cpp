@@ -21,6 +21,7 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	renderer.Update();
 	SDL::File file2("test.object");
 	file2.Save(objects);
+	
 }
 
 void Engine::Update() { // Gameplay and Physics

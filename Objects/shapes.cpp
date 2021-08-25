@@ -3,9 +3,12 @@
 // Created by Mihail Kornilovich on 22.08.2021.
 
 #include "shapes.h"
+#include "../Parser/object_parser.h"
 #include <cmath>
 using namespace SDL;
 using namespace Shapes;
+
+#define _USE_MATH_DEFINES
 
 
 Vector Object::GetPosition() const {
@@ -28,6 +31,14 @@ std::string Point::GetString() const {
 	return "type=point\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n';
 }
 
+void Point::stringToObject(std::stringstream& ss) {
+	std::string str;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		position_ = {std::stof(elements[1]), std::stof(elements[2])};
+	}
+}
+
 void Line::Draw(SDL_Renderer* renderer) {
 	SDL_RenderDrawLineF(renderer, position_.x, position_.y, finish.x, finish.y);
 }
@@ -35,6 +46,17 @@ void Line::Draw(SDL_Renderer* renderer) {
 std::string Line::GetString() const {
 	return  "type=line\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n'
 			+ "position=" + std::to_string(finish.x) + "," + std::to_string(finish.y) + '\n';	
+}
+
+void Line::stringToObject(std::stringstream& ss) {
+	std::string str;
+	bool check = true;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		if (check) position_ = {std::stof(elements[1]), std::stof(elements[2])};
+		else finish = {std::stof(elements[1]), std::stof(elements[2])};
+		check = false;
+	}
 }
 
 void Rect::Draw(SDL_Renderer* renderer) {
@@ -52,6 +74,15 @@ std::string Rect::GetString() const {
 			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + '\n';
 }
 
+void Rect::stringToObject(std::stringstream& ss) {
+	std::string str;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
+		else size = {std::stof(elements[1]), std::stof(elements[2])};
+	}
+}
+
 void Circle::Draw(SDL_Renderer* renderer) {
 	for (float y = position_.y - size.x; y < position_.y + size.x; ++y) {
 		for (float x = position_.x - size.x; x < position_.x + size.x; ++x) {
@@ -66,6 +97,15 @@ void Circle::Draw(SDL_Renderer* renderer) {
 std::string Circle::GetString() const {
 	return  "type=circle\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + "\n" +
 			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + "\n";
+}
+
+void Circle::stringToObject(std::stringstream& ss) {
+	std::string str;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
+		else size = {std::stof(elements[1]), std::stof(elements[2])};
+	}
 }
 
 void Circumference::Draw(SDL_Renderer* renderer) {
@@ -86,6 +126,16 @@ std::string Circumference::GetString() const {
 	return  "type=circumference\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + "\n" +
 			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + "\n";
 }
+
+void Circumference::stringToObject(std::stringstream& ss) {
+	std::string str;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
+		else size = {std::stof(elements[1]), std::stof(elements[2])};
+	}
+}
+
 
 namespace {
 	// Вычисляет положение точки D(xd,yd) относительно прямой AB
@@ -122,4 +172,77 @@ std::string Trinagle::GetString() const {
 	return  "type=trinagle\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n'
 			+ "position=" + std::to_string(second_point_.x) + "," + std::to_string(second_point_.y) + '\n' 
 			+ "position=" + std::to_string(third_point_.x) + "," + std::to_string(third_point_.y) + '\n';	
+}
+
+void Trinagle::stringToObject(std::stringstream& ss) {
+	std::string str;
+	int state = 0;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		if (state == 0) position_ = {std::stof(elements[1]), std::stof(elements[2])};
+		else if (state == 1) second_point_ = {std::stof(elements[1]), std::stof(elements[2])};
+		else third_point_ = {std::stof(elements[1]), std::stof(elements[2])};
+		++state;
+	}
+}
+
+namespace {
+	double calculateAngle(const Vector& point1, const Vector& point2) {
+		double dtheta, theta1, theta2;
+		
+		theta1 = atan2(point1.y, point1.x);
+		theta2 = atan2(point2.y, point2.x);
+		dtheta = theta2 - theta1;
+		while (dtheta > M_PI) dtheta -= 2 * M_PI;
+		while (dtheta < -M_PI) dtheta += 2 * M_PI;
+		return dtheta;
+	}
+	
+	bool insidePolygon(const std::vector<Vector>& points, const Vector& point) {
+		double angle = 0;
+		for (int i = 0; i < points.size(); ++i) {
+			Vector p1(points[i].x - point.x, points[i].y - point.y);
+			Vector p2(points[(i + 1) % points.size()].x - point.x, points[(i + 1) % points.size()].y - point.y);
+			angle += calculateAngle(p1, p2);
+		}
+		if (abs(angle) < M_PI) return false;
+		return true;
+	}
+	
+}
+
+void Polygon::Draw(SDL_Renderer* renderer) {
+	float x1 = MAXFLOAT, x2 = -1;
+	float y1 = MAXFLOAT, y2 = -1;
+	
+	for (const Vector& point : points_) {
+		x1 = std::fminf(point.x, x1);
+		x2 = std::fmaxf(point.x, x2);
+		y1 = std::fminf(point.y, y1);
+		y2 = std::fmaxf(point.y, y2);
+	}
+	
+	for (float y = y1; y <= y2; ++y) {
+		for (float x = x1; x <= x2; ++x) {
+			if (insidePolygon(points_, {x, y})) {
+				SDL_RenderDrawPointF(renderer, x, y);
+			}
+		}
+	}
+}
+
+std::string Polygon::GetString() const {
+	std::string ans="type=polygon";
+	for (int i = 0; i < points_.size(); ++i) {
+		ans += "\nposition=" + std::to_string(points_[i].x) + "," + std::to_string(points_[i].y);
+	}
+	return ans;
+}
+
+void Polygon::stringToObject(std::stringstream& ss) {
+	std::string str;
+	while (ss >> str) {
+		std::vector<std::string> elements = Parser::Split(str);
+		points_.push_back({std::stof(elements[1]), std::stof(elements[2])});
+	}
 }

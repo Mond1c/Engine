@@ -9,6 +9,7 @@
 #include "vector.h"
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <vector>
 
 
 namespace SDL {	
@@ -35,6 +36,8 @@ namespace SDL {
 		
 		virtual void Draw(SDL_Renderer* renderer) = 0;
 		virtual std::string GetString() const = 0;
+		
+		virtual void stringToObject(std::stringstream& ss) = 0;
 	protected:
 		Vector position_;
 		Vector size;
@@ -50,6 +53,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
 		};
 		
 		class Line : public Object {
@@ -59,6 +63,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
 		private:
 			Vector finish;
 		};
@@ -74,6 +79,7 @@ namespace SDL {
 			void Fill(SDL_Renderer* renderer);
 			
 			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
 		private:
 			SDL_FRect rect_;
 		};
@@ -85,6 +91,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
 		};
 		
 		class Circumference : public Object {
@@ -94,6 +101,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
 		};
 		
 		class Trinagle : public Object {
@@ -104,9 +112,22 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
 		private:
 			Vector second_point_;
 			Vector third_point_;
+		};
+		
+		class Polygon : public Object {
+		public:
+			Polygon(const std::vector<Vector>& points) : Object({0, 0}, {0, 0}), points_(points) {}
+			~Polygon() {}
+		
+			void Draw(SDL_Renderer* renderer) override;
+			std::string GetString() const override;
+			void stringToObject(std::stringstream& ss) override;
+		private:
+			std::vector<Vector> points_;
 		};
 	}
 }
