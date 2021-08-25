@@ -15,10 +15,23 @@ namespace SDL {
 	public:
 		File(const char* file_name) : file_name_(file_name) {}
 		File(const File&) = delete;
-		File(File&&) = delete;
+		File(File&& other) {
+			if (this != &other) {
+				if (file_name_) file_name_ = nullptr;
+				file_name_ = other.file_name_;
+				other.file_name_ = nullptr;
+			}
+		}
 		
 		File& operator=(const File&) = delete;
-		File& operator=(File&&) = delete;
+		File& operator=(File&& other) {
+			if (this != &other) {
+				if (file_name_) file_name_ = nullptr;
+				file_name_ = other.file_name_;
+				other.file_name_ = nullptr;
+			}
+			return *this;
+		}
 		
 		std::vector<SDL::Object*> Load();
 		void Save(std::vector<SDL::Object*> objects);

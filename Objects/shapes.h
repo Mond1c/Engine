@@ -23,7 +23,7 @@ namespace SDL {
 	class Object {
 	public:
 		Object(const Vector& position, const Vector& size) :
-			position_(position), size(size) {}
+			position_(position), size_(size) {}
 		virtual ~Object() {
 			
 		}
@@ -40,7 +40,7 @@ namespace SDL {
 		virtual void stringToObject(std::stringstream& ss) = 0;
 	protected:
 		Vector position_;
-		Vector size;
+		Vector size_;
 	};
 	
 	namespace Shapes {

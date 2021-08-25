@@ -21,8 +21,6 @@ namespace SDL {
 				if (renderer_) SDL_DestroyRenderer(renderer_);
 				renderer_ = other.renderer_;
 				other.renderer_ = nullptr;
-				color_ = other.color_;
-				other.color_ = Color();
 			}
 		}
 		
@@ -32,8 +30,6 @@ namespace SDL {
 				if (renderer_) SDL_DestroyRenderer(renderer_);
 				renderer_ = other.renderer_;
 				other.renderer_ = nullptr;
-				color_ = other.color_;
-				other.color_ = Color();
 			}
 			return *this;
 		}
@@ -46,7 +42,6 @@ namespace SDL {
 		SDL_Renderer* Ptr();
 	private:
 		SDL_Renderer* renderer_;
-		Color color_;
 	};
 	
 	class Window {

@@ -16,7 +16,7 @@ Vector Object::GetPosition() const {
 }
 
 Vector Object::GetSize() const {
-	return size;
+	return size_;
 }
 
 void Object::SetPosition(const Vector& position) {
@@ -60,7 +60,7 @@ void Line::stringToObject(std::stringstream& ss) {
 }
 
 void Rect::Draw(SDL_Renderer* renderer) {
-	rect_ = {position_.x, position_.y, position_.x + size.x, position_.y + size.y};
+	rect_ = {position_.x, position_.y, position_.x + size_.x, position_.y + size_.y};
 	Fill(renderer);
 	SDL_RenderDrawRectF(renderer, &rect_);
 }
@@ -71,7 +71,7 @@ void Rect::Fill(SDL_Renderer* renderer) {
 
 std::string Rect::GetString() const {
 	return  "type=rect\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n' +
-			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + '\n';
+			"size=" + std::to_string(size_.x) + "," + std::to_string(size_.y) + '\n';
 }
 
 void Rect::stringToObject(std::stringstream& ss) {
@@ -84,10 +84,10 @@ void Rect::stringToObject(std::stringstream& ss) {
 }
 
 void Circle::Draw(SDL_Renderer* renderer) {
-	for (float y = position_.y - size.x; y < position_.y + size.x; ++y) {
-		for (float x = position_.x - size.x; x < position_.x + size.x; ++x) {
+	for (float y = position_.y - size_.x; y < position_.y + size_.x; ++y) {
+		for (float x = position_.x - size_.x; x < position_.x + size_.x; ++x) {
 			if ((position_.x - x)*(position_.x - x) + (position_.y - y)*(position_.y - y) <= 
-				size.x) {
+				size_.x) {
 				SDL_RenderDrawPointF(renderer, x, y); 
 			}
 		}
@@ -96,7 +96,7 @@ void Circle::Draw(SDL_Renderer* renderer) {
 
 std::string Circle::GetString() const {
 	return  "type=circle\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + "\n" +
-			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + "\n";
+			"size=" + std::to_string(size_.x) + "," + std::to_string(size_.y) + "\n";
 }
 
 void Circle::stringToObject(std::stringstream& ss) {
@@ -104,18 +104,18 @@ void Circle::stringToObject(std::stringstream& ss) {
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
 		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else size = {std::stof(elements[1]), std::stof(elements[2])};
+		else size_ = {std::stof(elements[1]), std::stof(elements[2])};
 	}
 }
 
 void Circumference::Draw(SDL_Renderer* renderer) {
-	float CircumferenceSize = size.x / 5;
+	float CircumferenceSize = size_.x / 5;
 	
-	for (float y = position_.y - size.x; y < position_.y + size.x; ++y) {
-		for (float x = position_.x - size.x; x < position_.x + size.x; ++x) {
+	for (float y = position_.y - size_.x; y < position_.y + size_.x; ++y) {
+		for (float x = position_.x - size_.x; x < position_.x + size_.x; ++x) {
 			float length =(position_.x - x)*(position_.x - x) + (position_.y - y)*(position_.y - y);  
-			if (length >= size.x - CircumferenceSize &&
-				length <= size.x) {
+			if (length >= size_.x - CircumferenceSize &&
+				length <= size_.x) {
 					SDL_RenderDrawPointF(renderer, x, y); 
 				}
 		}
@@ -124,7 +124,7 @@ void Circumference::Draw(SDL_Renderer* renderer) {
 
 std::string Circumference::GetString() const {
 	return  "type=circumference\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + "\n" +
-			"size=" + std::to_string(size.x) + "," + std::to_string(size.y) + "\n";
+			"size=" + std::to_string(size_.x) + "," + std::to_string(size_.y) + "\n";
 }
 
 void Circumference::stringToObject(std::stringstream& ss) {
@@ -132,7 +132,7 @@ void Circumference::stringToObject(std::stringstream& ss) {
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
 		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else size = {std::stof(elements[1]), std::stof(elements[2])};
+		else size_ = {std::stof(elements[1]), std::stof(elements[2])};
 	}
 }
 

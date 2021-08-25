@@ -5,8 +5,7 @@
 #include "window.h"
 using namespace SDL;
 
-Renderer::Renderer(SDL_Window* window, int index, Uint32 flags) noexcept :
-	color_({0, 0, 0}) {
+Renderer::Renderer(SDL_Window* window, int index, Uint32 flags) noexcept {
 	renderer_ = SDL_CreateRenderer(window, index, flags);
 }
 
@@ -19,7 +18,6 @@ void Renderer::Draw(Object& object) {
 }
 
 void Renderer::SetColor(const Color& color) {
-	color_ = color;
 	SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
 }
 
