@@ -79,7 +79,7 @@ void Rect::stringToObject(std::stringstream& ss) {
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
 		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else size = {std::stof(elements[1]), std::stof(elements[2])};
+		else size_ = {std::stof(elements[1]), std::stof(elements[2])};
 	}
 }
 
