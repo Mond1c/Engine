@@ -1,11 +1,9 @@
 type=line
 position=0,400
 position=800,400
-#
 type=line
 position=400,0
 position=400,800
-#
 type=polygon
 position=100,100
 position=110,120

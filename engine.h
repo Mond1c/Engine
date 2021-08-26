@@ -28,12 +28,14 @@ public:
 	Engine& operator=(const Engine&) = delete;
 	Engine& operator=(Engine&&) = delete;
 	
-	void CreateObject(SDL::Object* object) {
+	SDL::Object* CreateObject(SDL::Object* object) {
 		objects.push_back(object);
+		return object;
 	}
 	
-	void CreateCollider(Physics::ICollider* collider) {
+	Physics::ICollider* CreateCollider(Physics::ICollider* collider) {
 		colliders.push_back(collider);
+		return collider;
 	}
 	
 	void Start();

@@ -12,15 +12,14 @@ std::vector<Object*> File::Load() {
 	std::string obj_info;
 	std::vector<Object*> objects;
 	while (file >> str) {
-		if (str[0] == '#') {
+		if (str.substr(0, 4) == "type" && !obj_info.empty()) {
 			std::stringstream ss;
 			ss << obj_info;
 			std::cout << obj_info << std::endl;
 			objects.push_back(Parser::Parse(ss));
 			obj_info.clear();
-		} else {
-			obj_info += str + '\n';
 		}
+		obj_info += str + '\n';
 	}
 	if (!obj_info.empty()) {
 		std::stringstream ss;
@@ -38,7 +37,7 @@ void File::Save(std::vector<Object*> objects) {
 	for (int i = 0; i < objects.size(); ++i) {
 		if (!objects[i]) continue;
 		file << objects[i]->GetString();
-		if (i != objects.size() - 1) file << "#\n";
+		//if (i != objects.size() - 1) file << "\n";
 	}
 	file.close();
 }
