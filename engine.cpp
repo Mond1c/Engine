@@ -23,7 +23,7 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	
 	for (float x = -WIDTH / 2; x < WIDTH / 2; x += 0.1f) {
 		float y = x*x - 4*x - 5;
-		SDL::Shapes::Point* p = static_cast<SDL::Shapes::Point*>(CreateObject(new SDL::Shapes::Point(SDL::Vector(x + WIDTH / 2, -1 * y * 0.1 + HEIGHT / 2))));
+		SDL::Shapes::Point* p = CreateObject<SDL::Shapes::Point>(new SDL::Shapes::Point(SDL::Vector(x + WIDTH / 2, -1 * y * 0.1 + HEIGHT / 2)));
 		p->Draw(renderer.Ptr());
 	}
 	

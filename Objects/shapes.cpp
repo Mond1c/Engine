@@ -31,7 +31,7 @@ std::string Point::GetString() const {
 	return "type=point\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n';
 }
 
-void Point::stringToObject(std::stringstream& ss) {
+void Point::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
@@ -48,7 +48,7 @@ std::string Line::GetString() const {
 			+ "position=" + std::to_string(finish.x) + "," + std::to_string(finish.y) + '\n';	
 }
 
-void Line::stringToObject(std::stringstream& ss) {
+void Line::StringToObject(std::stringstream& ss) {
 	std::string str;
 	bool check = true;
 	while (ss >> str) {
@@ -74,7 +74,7 @@ std::string Rect::GetString() const {
 			"size=" + std::to_string(size_.x) + "," + std::to_string(size_.y) + '\n';
 }
 
-void Rect::stringToObject(std::stringstream& ss) {
+void Rect::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
@@ -99,7 +99,7 @@ std::string Circle::GetString() const {
 			"size=" + std::to_string(size_.x) + "," + std::to_string(size_.y) + "\n";
 }
 
-void Circle::stringToObject(std::stringstream& ss) {
+void Circle::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
@@ -127,7 +127,7 @@ std::string Circumference::GetString() const {
 			"size=" + std::to_string(size_.x) + "," + std::to_string(size_.y) + "\n";
 }
 
-void Circumference::stringToObject(std::stringstream& ss) {
+void Circumference::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
@@ -174,7 +174,7 @@ std::string Trinagle::GetString() const {
 			+ "position=" + std::to_string(third_point_.x) + "," + std::to_string(third_point_.y) + '\n';	
 }
 
-void Trinagle::stringToObject(std::stringstream& ss) {
+void Trinagle::StringToObject(std::stringstream& ss) {
 	std::string str;
 	int state = 0;
 	while (ss >> str) {
@@ -239,7 +239,7 @@ std::string Polygon::GetString() const {
 	return ans;
 }
 
-void Polygon::stringToObject(std::stringstream& ss) {
+void Polygon::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);

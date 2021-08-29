@@ -28,14 +28,18 @@ public:
 	Engine& operator=(const Engine&) = delete;
 	Engine& operator=(Engine&&) = delete;
 	
-	SDL::Object* CreateObject(SDL::Object* object) {
+	template<typename Shape>
+	Shape* CreateObject(SDL::Object* object) {
+		if (object == nullptr) return nullptr;
 		objects.push_back(object);
-		return object;
+		return static_cast<Shape*>(object);
 	}
 	
-	Physics::ICollider* CreateCollider(Physics::ICollider* collider) {
+	template<typename Collider>
+	Collider* CreateCollider(Physics::ICollider* collider) {
+		if (collider == nullptr) return nullptr;
 		colliders.push_back(collider);
-		return collider;
+		return static_cast<Collider*>(collider);
 	}
 	
 	void Start();

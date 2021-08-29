@@ -37,7 +37,7 @@ namespace SDL {
 		virtual void Draw(SDL_Renderer* renderer) = 0;
 		virtual std::string GetString() const = 0;
 		
-		virtual void stringToObject(std::stringstream& ss) = 0;
+		virtual void StringToObject(std::stringstream& ss) = 0;
 	protected:
 		Vector position_;
 		Vector size_;
@@ -53,7 +53,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		};
 		
 		class Line : public Object {
@@ -63,7 +63,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		private:
 			Vector finish;
 		};
@@ -79,7 +79,7 @@ namespace SDL {
 			void Fill(SDL_Renderer* renderer);
 			
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		private:
 			SDL_FRect rect_;
 		};
@@ -91,7 +91,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		};
 		
 		class Circumference : public Object {
@@ -101,7 +101,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		};
 		
 		class Trinagle : public Object {
@@ -112,7 +112,7 @@ namespace SDL {
 			
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		private:
 			Vector second_point_;
 			Vector third_point_;
@@ -125,7 +125,7 @@ namespace SDL {
 		
 			void Draw(SDL_Renderer* renderer) override;
 			std::string GetString() const override;
-			void stringToObject(std::stringstream& ss) override;
+			void StringToObject(std::stringstream& ss) override;
 		private:
 			std::vector<Vector> points_;
 		};

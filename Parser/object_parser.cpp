@@ -12,36 +12,36 @@ Object* Parser::Parse(std::stringstream& stream) {
 	type = Split(type)[1];
 	if (type == "point") {
 		Shapes::Point* point = new Shapes::Point({0, 0});
-		point->stringToObject(stream);
+		point->StringToObject(stream);
 		return point;
 	}
 	if (type == "line") {
 		Shapes::Line* line = new Shapes::Line({0, 0}, {0, 0});
-		line->stringToObject(stream);
+		line->StringToObject(stream);
 		return line;
 	}
 	if (type == "rect") { 
 		Shapes::Rect* rect = new Shapes::Rect({0, 0}, {0, 0});
-		rect->stringToObject(stream);
+		rect->StringToObject(stream);
 		return rect;
 	}
 	if (type == "circle") {
 		Shapes::Circle* circle = new Shapes::Circle({0, 0}, {0, 0});
-		circle->stringToObject(stream);
+		circle->StringToObject(stream);
 		return circle;
 	}
 	if (type == "circumference") { 
 		Shapes::Circumference* circumference = new Shapes::Circumference({0, 0}, {0, 0});
-		circumference->stringToObject(stream);
+		circumference->StringToObject(stream);
 	}
 	if (type == "trinagle") {
 		Shapes::Trinagle* trinagle = new Shapes::Trinagle({0, 0}, {0, 0}, {0, 0});
-		trinagle->stringToObject(stream);
+		trinagle->StringToObject(stream);
 		return trinagle;
 	}
 	if (type == "polygon") {
 		Shapes::Polygon* polygon = new Shapes::Polygon({});
-		polygon->stringToObject(stream);
+		polygon->StringToObject(stream);
 		return polygon;
 	}
 	return nullptr;
