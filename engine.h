@@ -10,6 +10,7 @@
 #include "Render/event.h"
 #include "Physics/collider.h"
 #include "Parser/file.h"
+#include "Functions/function_parser.h"
 
 #include <vector>
 #include <memory>

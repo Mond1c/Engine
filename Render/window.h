@@ -8,6 +8,7 @@
 #include "../Objects/shapes.h"
 #include <SDL2/SDL.h>
 
+
 namespace SDL {
 	
 	class Renderer {

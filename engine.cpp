@@ -20,10 +20,11 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	for (SDL::Object* obj : objects) if (obj) renderer.Draw(*obj);
 	SDL::File file2("test.object");
 	file2.Save(objects);
-	
+	Functions::Function function = Functions::Parser::Parse("x^0.5 - 4*x - 5");
 	for (float x = -WIDTH / 2; x < WIDTH / 2; x += 0.1f) {
-		float y = x*x - 4*x - 5;
-		SDL::Shapes::Point* p = CreateObject<SDL::Shapes::Point>(new SDL::Shapes::Point(SDL::Vector(x + WIDTH / 2, -1 * y * 0.1 + HEIGHT / 2)));
+		float y = function.Calculate(x);
+		//std::cout << x + WIDTH / 2 << " " << -1 * y + HEIGHT / 2 << std::endl;
+		SDL::Shapes::Point* p = CreateObject<SDL::Shapes::Point>(new SDL::Shapes::Point(SDL::Vector(x + WIDTH / 2, -1 * y + HEIGHT / 2)));
 		p->Draw(renderer.Ptr());
 	}
 	
