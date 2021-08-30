@@ -21,7 +21,8 @@ namespace Functions {
 	public:
 		void AddToken(Token&& token);
 		
-		double Calculate(double x);
+		double Calculate(double x) const;
+		std::vector<Token>& GetTokens();
 	private:
 		std::vector<Token> tokens_;
 	};
@@ -31,6 +32,7 @@ namespace Functions {
 		static Function Parse(const std::string& expression);
 	private:
 		static std::vector<std::string> Split(const std::string string);
+		static void Simplification(std::vector<Token>& tokens);
 	};
 }
 #endif

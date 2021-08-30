@@ -21,6 +21,8 @@ public:
 	~Engine() {
 		for (SDL::Object* object : objects) delete object;
 		for (Physics::ICollider* collider : colliders) delete collider;
+		
+		SDL_Quit();
 	}
 	
 	Engine(const Engine&) = delete;
@@ -42,9 +44,26 @@ public:
 		colliders.push_back(collider);
 		return static_cast<Collider*>(collider);
 	}
+	void Awake() {
+		Start();
+		Game();
+	}
 	
 	void Start();
 	void Update();
+	
+	void Game() {
+		while (true) {
+			Update();
+			SDL::Event event;
+			if (event.PollEvent()) {
+				if (event.Type() == SDL::EventType::QUIT) {
+					break;
+				}
+			}
+			SDL::Delay(DELAY);
+		}
+	}
 private:
 	std::vector<SDL::Object*> objects;
 	std::vector<Physics::ICollider*> colliders;
