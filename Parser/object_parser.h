@@ -8,6 +8,7 @@
 #include "../Objects/shapes.h"
 #include <sstream>
 #include <vector>
+#include <memory>
 
 namespace SDL {
 	class Parser {
@@ -19,7 +20,7 @@ namespace SDL {
 		Parser& operator=(const Parser&) = delete;
 		Parser& operator=(Parser&&) = delete;
 		
-		static SDL::Object* Parse(std::stringstream& stream);
+		static std::shared_ptr<SDL::Object> Parse(std::stringstream& stream);
 		static std::vector<std::string> Split(const std::string& str);
 	};
 }

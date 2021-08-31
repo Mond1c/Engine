@@ -5,17 +5,17 @@
 #include "file.h"
 using namespace SDL;
 
-std::vector<Object*> File::Load() {
+std::vector<std::shared_ptr<Object>> File::Load() {
 	std::fstream file(file_name_);
 	if (!file) throw std::runtime_error("File does not exist");
 	std::string str;
 	std::string obj_info;
-	std::vector<Object*> objects;
+	std::vector<std::shared_ptr<Object>> objects;
 	while (file >> str) {
 		if (str.substr(0, 4) == "type" && !obj_info.empty()) {
 			std::stringstream ss;
 			ss << obj_info;
-			std::cout << obj_info << std::endl;
+			//std::cout << obj_info << std::endl;
 			objects.push_back(Parser::Parse(ss));
 			obj_info.clear();
 		}
@@ -31,7 +31,7 @@ std::vector<Object*> File::Load() {
 	return objects;
 }
 
-void File::Save(std::vector<Object*> objects) {
+void File::Save(std::vector<std::shared_ptr<Object>> objects) {
 	std::ofstream file;
 	file.open(file_name_);
 	for (int i = 0; i < objects.size(); ++i) {

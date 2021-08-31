@@ -4,9 +4,6 @@
 #include "engine.h"
 #include <iostream>
 
-Engine::Engine() : window(SDL::Window("Window", SDL::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED), SDL::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN)), renderer(SDL::Renderer(window.Ptr(), -1, SDL_RENDERER_ACCELERATED)) {
-} // This is Awake. You need to init window and renderer
-
 //To create object use CreateObject(Object*);
 //To create collider use CreateCollider(ICollider*)
 //To load objects use objects = file.Load();
@@ -16,16 +13,20 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	renderer.Clear();
 	renderer.SetColor(SDL::Color(0, 0, 0));
 	SDL::File file("Object.object");
-	objects = file.Load();
-	for (SDL::Object* obj : objects) if (obj) renderer.Draw(*obj);
+	std::vector<std::shared_ptr<SDL::Object>> objects = file.Load();
+	for (std::shared_ptr<SDL::Object> obj : objects) if (obj) renderer.Draw(*obj);
 	SDL::File file2("test.object");
 	file2.Save(objects);
-	Functions::Function function = Functions::Parser::Parse("x - x + 5");
+	std::unique_ptr<Functions::Function> function = Functions::Parser::Parse("x - x + 5");
+	
+	//for (std::shared_ptr<Functions::IToken> token : function->GetTokens()) std::cout << token->number << std::endl; 
+	
 	for (float x = -WIDTH / 2; x < WIDTH / 2; x += 0.1f) {
-		float y = function.Calculate(x);
+		float y = function->Calculate(x);
+	//	std::cout << y << std::endl;
 		//std::cout << y << std::endl;
-		std::cout << x + WIDTH / 2 << " " << -1 * y + HEIGHT / 2 << std::endl;
-		SDL::Shapes::Point* p = CreateObject<SDL::Shapes::Point>(new SDL::Shapes::Point(SDL::Vector(x + WIDTH / 2, -1 * y + HEIGHT / 2)));
+		//std::cout << x + WIDTH / 2 << " " << -1 * y + HEIGHT / 2 << std::endl;
+		std::shared_ptr<SDL::Shapes::Point> p = std::make_shared<SDL::Shapes::Point>(SDL::Vector(x + WIDTH / 2, -1 * y + HEIGHT / 2));
 		p->Draw(renderer.Ptr());
 	}
 	

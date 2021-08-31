@@ -33,8 +33,8 @@ namespace SDL {
 			return *this;
 		}
 		
-		std::vector<SDL::Object*> Load();
-		void Save(std::vector<SDL::Object*> objects);
+		std::vector<std::shared_ptr<SDL::Object>> Load();
+		void Save(std::vector<std::shared_ptr<SDL::Object>> objects);
 	private:
 		const char* file_name_;
 	};

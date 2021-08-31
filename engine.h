@@ -17,11 +17,8 @@
 
 class Engine {
 public:
-	Engine();
+	Engine(): window(SDL::Window("Window", SDL::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED), SDL::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN)), renderer(SDL::Renderer(window.Ptr(), -1, SDL_RENDERER_ACCELERATED)) { } 
 	~Engine() {
-		for (SDL::Object* object : objects) delete object;
-		for (Physics::ICollider* collider : colliders) delete collider;
-		
 		SDL_Quit();
 	}
 	
@@ -31,19 +28,6 @@ public:
 	Engine& operator=(const Engine&) = delete;
 	Engine& operator=(Engine&&) = delete;
 	
-	template<typename Shape>
-	Shape* CreateObject(SDL::Object* object) {
-		if (object == nullptr) return nullptr;
-		objects.push_back(object);
-		return static_cast<Shape*>(object);
-	}
-	
-	template<typename Collider>
-	Collider* CreateCollider(Physics::ICollider* collider) {
-		if (collider == nullptr) return nullptr;
-		colliders.push_back(collider);
-		return static_cast<Collider*>(collider);
-	}
 	void Awake() {
 		Start();
 		Game();
@@ -65,8 +49,6 @@ public:
 		}
 	}
 private:
-	std::vector<SDL::Object*> objects;
-	std::vector<Physics::ICollider*> colliders;
 	
 	SDL::Window window;
 	SDL::Renderer renderer;

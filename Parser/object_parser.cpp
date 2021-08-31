@@ -6,41 +6,41 @@
 #include <iostream>
 using namespace SDL;
 
-Object* Parser::Parse(std::stringstream& stream) {
+std::shared_ptr<Object> Parser::Parse(std::stringstream& stream) {
 	std::string type;
 	stream >> type;
 	type = Split(type)[1];
 	if (type == "point") {
-		Shapes::Point* point = new Shapes::Point({0, 0});
+		std::shared_ptr<Shapes::Point> point = std::make_shared<Shapes::Point>(Vector(0, 0));
 		point->StringToObject(stream);
 		return point;
 	}
 	if (type == "line") {
-		Shapes::Line* line = new Shapes::Line({0, 0}, {0, 0});
+		std::shared_ptr<Shapes::Line> line = std::make_shared<Shapes::Line>(Vector(0, 0), Vector(0, 0));
 		line->StringToObject(stream);
 		return line;
 	}
 	if (type == "rect") { 
-		Shapes::Rect* rect = new Shapes::Rect({0, 0}, {0, 0});
+		std::shared_ptr<Shapes::Rect> rect = std::make_shared<Shapes::Rect>(Vector(0, 0), Vector(0, 0));
 		rect->StringToObject(stream);
 		return rect;
 	}
 	if (type == "circle") {
-		Shapes::Circle* circle = new Shapes::Circle({0, 0}, {0, 0});
+		std::shared_ptr<Shapes::Circle> circle = std::make_shared<Shapes::Circle>(Vector(0, 0), Vector(0, 0));
 		circle->StringToObject(stream);
 		return circle;
 	}
 	if (type == "circumference") { 
-		Shapes::Circumference* circumference = new Shapes::Circumference({0, 0}, {0, 0});
+		std::shared_ptr<Shapes::Circumference> circumference = std::make_shared<Shapes::Circumference>(Vector(0, 0), Vector(0, 0));
 		circumference->StringToObject(stream);
 	}
 	if (type == "trinagle") {
-		Shapes::Trinagle* trinagle = new Shapes::Trinagle({0, 0}, {0, 0}, {0, 0});
+		std::shared_ptr<Shapes::Trinagle> trinagle = std::make_shared<Shapes::Trinagle>(Vector(0, 0), Vector(0, 0), Vector(0, 0));
 		trinagle->StringToObject(stream);
 		return trinagle;
 	}
 	if (type == "polygon") {
-		Shapes::Polygon* polygon = new Shapes::Polygon({});
+		std::shared_ptr<Shapes::Polygon> polygon = std::make_shared<Shapes::Polygon>(std::vector<Vector>{});
 		polygon->StringToObject(stream);
 		return polygon;
 	}

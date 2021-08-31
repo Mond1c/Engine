@@ -8,46 +8,42 @@
 #include <iostream>
 using namespace Functions;
 
-void Function::AddToken(Token&& token) {
+double Token::Number::Calculate(double x) const {
+	return number;
+}
+
+double Token::Linear::Calculate(double x) const {
+	return number * x;
+}
+
+double Token::Power::Calculate(double x) const {
+	return number * std::pow(x, power);
+}
+
+void Function::AddToken(std::shared_ptr<IToken> token) {
 	tokens_.push_back(token);
 }
 
 double Function::Calculate(double x) const {
 	double y = 0;
-	for (const Token& token : tokens_) {
-		y += token.number * std::pow(x, token.variable);
+	for (const std::shared_ptr<IToken> token : tokens_) {
+		y += token->Calculate(x);
 	}
 	return y;
 }
 
-std::vector<Token>& Function::GetTokens() {
+std::vector<std::shared_ptr<IToken>>& Function::GetTokens() {
 	return tokens_;
 }
 
-Function Parser::Parse(const std::string& expression) { // x - x + 5
+std::unique_ptr<Function> Parser::Parse(const std::string& expression) { // x - x + 5
 	std::vector<std::string> parts = Split(expression); // {"x", "-x", "+5"}
-	Function function;
-	for (const std::string part : parts) {
-		if (std::count(part.begin(), part.end(), 'x') > 0) {
-			std::string number;
-			std::string power;
-			bool isPower = false;
-			for (char ch : part) {
-				if (ch == 'x' || ch == '*') continue;
-				if (ch == '^') isPower = true;
-				else if (isPower) power += ch;
-				else number += ch;
-			}
-			if (power.empty()) power = "1";
-			if (number.empty()) number = "1";
-			if (number == "-") number = "-1";
-			function.AddToken(Token{std::stod(power), std::stod(number)});
-		} else {
-			function.AddToken(Token{0, std::stod(part)});
-		}
-	}
-	Simplification(function.GetTokens());
-	for (const auto& token : function.GetTokens()) std::cout << token.variable << " " << token.number << std::endl;
+	
+	std::unique_ptr<Function> function;
+	
+	if (expression.find('^') != std::string::npos) function = ParsePowerFunction(parts);
+	else function = ParseLinearFunction(parts);
+	
 	return function;
 }
 
@@ -65,15 +61,43 @@ std::vector<std::string> Parser::Split(const std::string string) {
 	return strings;
 }
 
-void Parser::Simplification(std::vector<Token>& tokens) {
-	std::sort(tokens.begin(), tokens.end(), [](const Token& lhs, const Token& rhs) {
-		return lhs.variable > rhs.variable;
-	});
-	for (int i = 1; i < tokens.size(); ++i) {
-		if (tokens[i - 1].variable == tokens[i].variable) {
-			tokens[i - 1].number += tokens[i].number;
-			tokens.erase(tokens.begin() + i);
-			--i;
+std::unique_ptr<Function> Parser::ParseLinearFunction(std::vector<std::string>& expression) {
+	std::unique_ptr<Function> function = std::make_unique<Function>();
+	for (const std::string& part : expression) {
+		auto it = part.find('x');
+		if (it != std::string::npos) {
+			std::string number = part.substr(0, it);
+			//std::cout << number << std::endl;
+			if (number.empty()) number = "1";
+			else if (number == "-") number = "-1";
+			function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
+		} else {
+			function->AddToken(std::make_shared<Token::Number>(std::stod(part)));
 		}
 	}
+	return function;
+}
+
+std::unique_ptr<Function> Parser::ParsePowerFunction(std::vector<std::string>& expreesion) {
+	std::unique_ptr<Function> function = std::make_unique<Function>();
+	for (const std::string& part : expreesion) {
+		auto it = part.find('x');
+		if (it != std::string::npos) {
+			if (it + 1 < part.size() && part[it + 1] == '^') {
+				std::string number = part.substr(0, it);
+				std::string power = part.substr(it + 2, part.size());
+				if (number.empty()) number = "1";
+				else if (number == "-") number = "-1";
+				function->AddToken(std::make_shared<Token::Power>(std::stod(number), std::stod(power)));
+			} else {
+				std::string number = part.substr(0, it);
+				if (number.empty()) number = "1";
+				else if (number == "-") number = "-1";
+				function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
+			}
+		} else {
+			function->AddToken(std::make_shared<Token::Number>(std::stod(part)));
+		}
+	}
+	return function;
 }

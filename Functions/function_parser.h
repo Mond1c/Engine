@@ -8,31 +8,70 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace Functions {
-	namespace {
-		struct Token {
-			double variable; // Only power of variable. If power equals 0 means that variable does not exist
-			double number;
+	class IToken {
+	public:
+		double number;
+		
+		IToken(double number) : number(number) {}
+		
+		virtual double Calculate(double x) const = 0;
+		
+		virtual ~IToken() {}
+	};
+	
+	namespace Token {
+		class Number : public IToken {
+		public:
+			Number(double number) : IToken(number) {}
+			
+			double Calculate(double x) const override;
+			
+			~Number() {}
+		};
+		
+		class Linear : public IToken {
+		public:
+			Linear(double number) : IToken(number) {}
+			
+			double Calculate(double x) const override;
+			
+			~Linear() {}
+		};
+		
+		class Power : public IToken {
+		public:
+			double power;
+			
+			Power(double number, double power) : IToken(number), power(power) {}
+			
+			double Calculate(double x) const override;
+			
+			~Power() {}
 		};
 	}
 	
 	class Function {
 	public:
-		void AddToken(Token&& token);
+
+		void AddToken(std::shared_ptr<IToken> token);
 		
 		double Calculate(double x) const;
-		std::vector<Token>& GetTokens();
+		std::vector<std::shared_ptr<IToken>>& GetTokens();
 	private:
-		std::vector<Token> tokens_;
+		std::vector<std::shared_ptr<IToken>> tokens_;
 	};
 	
 	class Parser {
 	public:
-		static Function Parse(const std::string& expression);
+		static std::unique_ptr<Function> Parse(const std::string& expression);
 	private:
 		static std::vector<std::string> Split(const std::string string);
-		static void Simplification(std::vector<Token>& tokens);
+		
+		static std::unique_ptr<Function> ParseLinearFunction(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParsePowerFunction(std::vector<std::string>& expression);
 	};
 }
 #endif
