@@ -11,8 +11,7 @@
 #include <memory>
 
 namespace Functions {
-	class IToken {
-	public:
+	struct IToken {
 		double number;
 		
 		IToken(double number) : number(number) {}
@@ -23,8 +22,7 @@ namespace Functions {
 	};
 	
 	namespace Token {
-		class Number : public IToken {
-		public:
+		struct Number : public IToken {
 			Number(double number) : IToken(number) {}
 			
 			double Calculate(double x) const override;
@@ -32,8 +30,7 @@ namespace Functions {
 			~Number() {}
 		};
 		
-		class Linear : public IToken {
-		public:
+		struct Linear : public IToken {
 			Linear(double number) : IToken(number) {}
 			
 			double Calculate(double x) const override;
@@ -41,8 +38,7 @@ namespace Functions {
 			~Linear() {}
 		};
 		
-		class Power : public IToken {
-		public:
+		struct Power : public IToken {
 			double power;
 			
 			Power(double number, double power) : IToken(number), power(power) {}
@@ -50,6 +46,16 @@ namespace Functions {
 			double Calculate(double x) const override;
 			
 			~Power() {}
+		};
+		
+		struct Logarithmic : public IToken {
+			double base;
+			
+			Logarithmic(double number, double base) : IToken(number), base(base) {}
+			
+			double Calculate(double x) const override;
+			
+			~Logarithmic() {}
 		};
 	}
 	
@@ -70,8 +76,17 @@ namespace Functions {
 	private:
 		static std::vector<std::string> Split(const std::string string);
 		
+		enum class Type {
+			LINEAR,
+			POWER,
+			LOGARITHMIC
+		};
+		
+		static Type GetTypeOfExpression(const std::string& expression);
+		
 		static std::unique_ptr<Function> ParseLinearFunction(std::vector<std::string>& expression);
 		static std::unique_ptr<Function> ParsePowerFunction(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseLogarithmicFunction(std::vector<std::string>& expression);
 	};
 }
 #endif

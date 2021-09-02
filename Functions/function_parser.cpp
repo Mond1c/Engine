@@ -20,6 +20,10 @@ double Token::Power::Calculate(double x) const {
 	return number * std::pow(x, power);
 }
 
+double Token::Logarithmic::Calculate(double x) const {
+	return log(x) / log(base);
+}
+
 void Function::AddToken(std::shared_ptr<IToken> token) {
 	tokens_.push_back(token);
 }
@@ -41,7 +45,10 @@ std::unique_ptr<Function> Parser::Parse(const std::string& expression) { // x - 
 	
 	std::unique_ptr<Function> function;
 	
-	if (expression.find('^') != std::string::npos) function = ParsePowerFunction(parts);
+	Type type = GetTypeOfExpression(expression);
+	
+	if (type == Type::POWER) function = ParsePowerFunction(parts);
+	else if (type == Type::LOGARITHMIC) function = ParseLogarithmicFunction(parts);
 	else function = ParseLinearFunction(parts);
 	
 	return function;
@@ -59,6 +66,12 @@ std::vector<std::string> Parser::Split(const std::string string) {
 	}
 	if (!part.empty()) strings.push_back(part);
 	return strings;
+}
+
+Parser::Type Parser::GetTypeOfExpression(const std::string& expression) {
+	if (expression.find('^') != std::string::npos) return Type::POWER;
+	if (expression.find("log") != std::string::npos) return Type::LOGARITHMIC;
+	return Type::LINEAR;
 }
 
 std::unique_ptr<Function> Parser::ParseLinearFunction(std::vector<std::string>& expression) {
@@ -93,6 +106,33 @@ std::unique_ptr<Function> Parser::ParsePowerFunction(std::vector<std::string>& e
 				std::string number = part.substr(0, it);
 				if (number.empty()) number = "1";
 				else if (number == "-") number = "-1";
+				function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
+			}
+		} else {
+			function->AddToken(std::make_shared<Token::Number>(std::stod(part)));
+		}
+	}
+	return function;
+}
+
+std::unique_ptr<Function> Parser::ParseLogarithmicFunction(std::vector<std::string>& expression) {
+	std::unique_ptr<Function> function = std::make_unique<Function>();
+	for (const std::string& part : expression) {
+		auto it = part.find("x");
+		if (it != std::string::npos) {
+			auto lg = part.find("log");
+			std::string number;
+			std::string base;
+			if (lg != std::string::npos) {
+				base = part.substr(lg + 3, it - 2);
+				number = part.substr(0, lg);
+				if (number.empty()) number = "1";
+				else if (number == "-") number = "-1";
+				function->AddToken(std::make_shared<Token::Logarithmic>(std::stod(number), std::stod(base)));
+			} else {
+				number = part.substr(0, it);
+				if (number.empty()) number = "1";
+				else if(number == "-") number = "-1";
 				function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
 			}
 		} else {

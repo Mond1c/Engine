@@ -17,12 +17,13 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	for (std::shared_ptr<SDL::Object> obj : objects) if (obj) renderer.Draw(*obj);
 	SDL::File file2("test.object");
 	file2.Save(objects);
-	std::unique_ptr<Functions::Function> function = Functions::Parser::Parse("x - x + 5");
+	std::unique_ptr<Functions::Function> function = Functions::Parser::Parse("log2x");
 	
 	//for (std::shared_ptr<Functions::IToken> token : function->GetTokens()) std::cout << token->number << std::endl; 
 	
-	for (float x = -WIDTH / 2; x < WIDTH / 2; x += 0.1f) {
+	for (float x = -WIDTH / 2; x < WIDTH / 2; x += 0.05f) {
 		float y = function->Calculate(x);
+		if (y > HEIGHT / 2) continue;
 	//	std::cout << y << std::endl;
 		//std::cout << y << std::endl;
 		//std::cout << x + WIDTH / 2 << " " << -1 * y + HEIGHT / 2 << std::endl;
