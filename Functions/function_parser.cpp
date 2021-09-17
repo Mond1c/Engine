@@ -5,7 +5,7 @@
 #include "function_parser.h"
 #include <cmath>
 #include <algorithm>
-#include <iostream>
+
 using namespace Functions;
 
 double Token::Number::Calculate(double x) const {
@@ -22,6 +22,18 @@ double Token::Power::Calculate(double x) const {
 
 double Token::Logarithmic::Calculate(double x) const {
 	return log(x) / log(base);
+}
+
+double Token::Sinus::Calculate(double x) const {
+	return std::sin(x);
+}
+
+double Token::Cosinus::Calculate(double x) const {
+	return std::cos(x);
+}
+
+double Token::Tangens::Calculate(double x) const {
+	return std::tan(x);
 }
 
 void Function::AddToken(std::shared_ptr<IToken> token) {
@@ -49,12 +61,15 @@ std::unique_ptr<Function> Parser::Parse(const std::string& expression) { // x - 
 	
 	if (type == Type::POWER) function = ParsePowerFunction(parts);
 	else if (type == Type::LOGARITHMIC) function = ParseLogarithmicFunction(parts);
+	else if (type == Type::SINUS) function = ParseSinusFunction(parts);
+	else if (type == Type::COSINUS) function = ParseCosinusFunction(parts);
+	else if (type == Type::TANGENS) function = ParseTangensFunction(parts);
 	else function = ParseLinearFunction(parts);
 	
 	return function;
 }
 
-std::vector<std::string> Parser::Split(const std::string string) {
+std::vector<std::string> Parser::Split(const std::string& string) {
 	std::vector<std::string> strings;
 	std::string part;
 	for (char ch : string) {
@@ -71,6 +86,9 @@ std::vector<std::string> Parser::Split(const std::string string) {
 Parser::Type Parser::GetTypeOfExpression(const std::string& expression) {
 	if (expression.find('^') != std::string::npos) return Type::POWER;
 	if (expression.find("log") != std::string::npos) return Type::LOGARITHMIC;
+	if (expression.find("sin") != std::string::npos) return Type::SINUS;
+    if (expression.find("cos") != std::string::npos) return Type::COSINUS;
+    if (expression.find("tan") != std::string::npos) return Type::TANGENS;
 	return Type::LINEAR;
 }
 
@@ -118,7 +136,7 @@ std::unique_ptr<Function> Parser::ParsePowerFunction(std::vector<std::string>& e
 std::unique_ptr<Function> Parser::ParseLogarithmicFunction(std::vector<std::string>& expression) {
 	std::unique_ptr<Function> function = std::make_unique<Function>();
 	for (const std::string& part : expression) {
-		auto it = part.find("x");
+		auto it = part.find('x');
 		if (it != std::string::npos) {
 			auto lg = part.find("log");
 			std::string number;
@@ -140,4 +158,79 @@ std::unique_ptr<Function> Parser::ParseLogarithmicFunction(std::vector<std::stri
 		}
 	}
 	return function;
+}
+
+std::unique_ptr<Function> Parser::ParseSinusFunction(std::vector<std::string> &expression) {
+    std::unique_ptr<Function> function = std::make_unique<Function>();
+    for (const std::string& part : expression) {
+        auto it = part.find('x');
+        if (it != std::string::npos) {
+            std::string number;
+            auto sinus = part.find("sin");
+            if (sinus != std::string::npos) {
+                number = part.substr(0, sinus);
+                if (number.empty()) number = "1";
+                else if (number == "-") number = "-1";
+                function->AddToken(std::make_shared<Token::Sinus>(std::stod(number)));
+            } else {
+                number = part.substr(0, it);
+                if (number.empty()) number = "1";
+                else if (number == "-") number = "-1";
+                function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
+            }
+        } else {
+            function->AddToken(std::make_shared<Token::Number>(std::stod(part)));
+        }
+    }
+    return function;
+}
+
+std::unique_ptr<Function> Parser::ParseCosinusFunction(std::vector<std::string> &expression) {
+    std::unique_ptr<Function> function = std::make_unique<Function>();
+    for (const std::string& part : expression) {
+        auto it = part.find('x');
+        if (it != std::string::npos) {
+            std::string number;
+            auto cosinus = part.find("cos");
+            if (cosinus != std::string::npos) {
+                number = part.substr(0, cosinus);
+                if (number.empty()) number = "1";
+                else if (number == "-") number = "-1";
+                function->AddToken(std::make_shared<Token::Cosinus>(std::stod(number)));
+            } else {
+                number = part.substr(0, it);
+                if (number.empty()) number = "1";
+                else if (number == "-") number = "-1";
+                function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
+            }
+        } else {
+            function->AddToken(std::make_shared<Token::Number>(std::stod(part)));
+        }
+    }
+    return function;
+}
+
+std::unique_ptr<Function> Parser::ParseTangensFunction(std::vector<std::string> &expression) {
+    std::unique_ptr<Function> function = std::make_unique<Function>();
+    for (const std::string& part : expression) {
+        auto it = part.find('x');
+        if (it != std::string::npos) {
+            std::string number;
+            auto tangens = part.find("tan");
+            if (tangens != std::string::npos) {
+                number = part.substr(0, tangens);
+                if (number.empty()) number = "1";
+                else if (number == "-") number = "-1";
+                function->AddToken(std::make_shared<Token::Tangens>(std::stod(number)));
+            } else {
+                number = part.substr(0, it);
+                if (number.empty()) number = "1";
+                else if (number == "-") number = "-1";
+                function->AddToken(std::make_shared<Token::Linear>(std::stod(number)));
+            }
+        } else {
+            function->AddToken(std::make_shared<Token::Number>(std::stod(part)));
+        }
+    }
+    return function;
 }

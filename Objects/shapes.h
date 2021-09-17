@@ -7,7 +7,7 @@
 #define _shapes_h_
 
 #include "vector.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <iostream>
 #include <vector>
 

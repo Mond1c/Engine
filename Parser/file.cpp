@@ -41,3 +41,4 @@ void File::Save(std::vector<std::shared_ptr<Object>> objects) {
 	}
 	file.close();
 }
+

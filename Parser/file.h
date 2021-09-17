@@ -32,6 +32,7 @@ namespace SDL {
 			}
 			return *this;
 		}
+
 		
 		std::vector<std::shared_ptr<SDL::Object>> Load();
 		void Save(std::vector<std::shared_ptr<SDL::Object>> objects);

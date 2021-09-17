@@ -14,28 +14,28 @@ namespace Functions {
 	struct IToken {
 		double number;
 		
-		IToken(double number) : number(number) {}
+		explicit IToken(double number) : number(number) {}
 		
-		virtual double Calculate(double x) const = 0;
+		[[nodiscard]] virtual double Calculate(double x) const = 0;
 		
-		virtual ~IToken() {}
+		virtual ~IToken() = default;
 	};
 	
 	namespace Token {
 		struct Number : public IToken {
-			Number(double number) : IToken(number) {}
+			explicit Number(double number) : IToken(number) {}
 			
-			double Calculate(double x) const override;
+			[[nodiscard]] double Calculate(double x) const override;
 			
-			~Number() {}
+			~Number() override = default;
 		};
 		
 		struct Linear : public IToken {
-			Linear(double number) : IToken(number) {}
+			explicit Linear(double number) : IToken(number) {}
 			
-			double Calculate(double x) const override;
+			[[nodiscard]] double Calculate(double x) const override;
 			
-			~Linear() {}
+			~Linear() override = default;
 		};
 		
 		struct Power : public IToken {
@@ -43,9 +43,9 @@ namespace Functions {
 			
 			Power(double number, double power) : IToken(number), power(power) {}
 			
-			double Calculate(double x) const override;
+			[[nodiscard]] double Calculate(double x) const override;
 			
-			~Power() {}
+			~Power() override = default;
 		};
 		
 		struct Logarithmic : public IToken {
@@ -53,9 +53,30 @@ namespace Functions {
 			
 			Logarithmic(double number, double base) : IToken(number), base(base) {}
 			
-			double Calculate(double x) const override;
+			[[nodiscard]] double Calculate(double x) const override;
 			
-			~Logarithmic() {}
+			~Logarithmic() override = default;
+		};
+		
+		struct Sinus : public IToken {
+			explicit Sinus(double number) : IToken(number) {}
+			[[nodiscard]] double Calculate(double x) const override;
+
+			~Sinus() override = default;
+		};
+		
+		struct Cosinus : public IToken {
+			explicit Cosinus(double number) : IToken(number) {}
+			[[nodiscard]] double Calculate(double x) const override;
+
+			~Cosinus() override = default;
+		};
+		
+		struct Tangens : public IToken {
+			explicit Tangens(double number) : IToken(number) {}
+			[[nodiscard]] double Calculate(double x) const override;
+
+			~Tangens() override = default;
 		};
 	}
 	
@@ -64,7 +85,7 @@ namespace Functions {
 
 		void AddToken(std::shared_ptr<IToken> token);
 		
-		double Calculate(double x) const;
+		[[nodiscard]] double Calculate(double x) const;
 		std::vector<std::shared_ptr<IToken>>& GetTokens();
 	private:
 		std::vector<std::shared_ptr<IToken>> tokens_;
@@ -74,12 +95,15 @@ namespace Functions {
 	public:
 		static std::unique_ptr<Function> Parse(const std::string& expression);
 	private:
-		static std::vector<std::string> Split(const std::string string);
+		static std::vector<std::string> Split(const std::string& string);
 		
 		enum class Type {
 			LINEAR,
 			POWER,
-			LOGARITHMIC
+			LOGARITHMIC,
+			SINUS,
+			COSINUS,
+			TANGENS
 		};
 		
 		static Type GetTypeOfExpression(const std::string& expression);
@@ -87,6 +111,9 @@ namespace Functions {
 		static std::unique_ptr<Function> ParseLinearFunction(std::vector<std::string>& expression);
 		static std::unique_ptr<Function> ParsePowerFunction(std::vector<std::string>& expression);
 		static std::unique_ptr<Function> ParseLogarithmicFunction(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseSinusFunction(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseCosinusFunction(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseTangensFunction(std::vector<std::string>& expression);
 	};
 }
 #endif

@@ -6,7 +6,7 @@
 #define _window_h_
 
 #include "../Objects/shapes.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 
 namespace SDL {

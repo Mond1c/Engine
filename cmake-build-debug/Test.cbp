@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Test"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\SDL2\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/elenak/Documents/SDL/Test/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/elenak/Documents/SDL/Test/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/elenak/Documents/SDL/Test/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Test">
+				<Option output="/Users/elenak/Documents/SDL/Test/cmake-build-debug/Test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/elenak/Documents/SDL/Test/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/elenak/Documents/SDL/Test/."/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Functions"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Objects"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Parser"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Physics"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Render"/>
+					<Add directory="/usr/local/Cellar/sdl2/2.0.16/include/SDL2"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Test/fast">
+				<Option output="/Users/elenak/Documents/SDL/Test/cmake-build-debug/Test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/elenak/Documents/SDL/Test/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/elenak/Documents/SDL/Test/."/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Functions"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Objects"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Parser"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Physics"/>
+					<Add directory="/Users/elenak/Documents/SDL/Test/Render"/>
+					<Add directory="/usr/local/Cellar/sdl2/2.0.16/include/SDL2"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Functions/function_parser.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Functions/function_parser.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Objects/shapes.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Objects/shapes.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Objects/vector.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Parser/file.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Parser/file.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Parser/object_parser.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Parser/object_parser.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Physics/collider.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Physics/collider.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Render/event.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Render/event.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Render/window.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/Render/window.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/engine.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/engine.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/main.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/settings.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/../../../../../usr/local/lib/cmake/SDL2/sdl2-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\SDL2\"/>
+		</Unit>
+		<Unit filename="/Users/elenak/Documents/SDL/Test/../../../../../usr/local/lib/cmake/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\SDL2\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

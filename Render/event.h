@@ -6,7 +6,7 @@
 #ifndef _event_h_
 #define _event_h_
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 namespace SDL {
 	enum EventType {
