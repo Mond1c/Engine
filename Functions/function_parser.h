@@ -17,6 +17,7 @@ namespace Functions {
 		explicit IToken(double number) : number(number) {}
 		
 		[[nodiscard]] virtual double Calculate(double x) const = 0;
+
 		
 		virtual ~IToken() = default;
 	};
@@ -44,6 +45,7 @@ namespace Functions {
 			Power(double number, double power) : IToken(number), power(power) {}
 			
 			[[nodiscard]] double Calculate(double x) const override;
+
 			
 			~Power() override = default;
 		};
