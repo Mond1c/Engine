@@ -12,10 +12,10 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	renderer.SetColor(SDL::Color(225, 255, 255));
 	renderer.Clear();
 	renderer.SetColor(SDL::Color(0, 0, 0));
-	SDL::File file("../Object.object");
+	SDL::File file("Object.object");
 	std::vector<std::shared_ptr<SDL::Object>> objects = file.Load();
 	for (std::shared_ptr<SDL::Object> obj : objects) if (obj) renderer.Draw(*obj);
-	SDL::File file2("../test.object");
+	SDL::File file2("test.object");
 	file2.Save(objects);
 	std::unique_ptr<Functions::Function> function = Functions::Parser::Parse("sinx");
 	
