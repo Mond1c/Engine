@@ -17,7 +17,7 @@ namespace SDL {
 		~Renderer();
 		
 		Renderer(const Renderer&) = delete;
-		Renderer(Renderer&& other) {
+		Renderer(Renderer&& other)  noexcept {
 			if (this != &other) {
 				if (renderer_) SDL_DestroyRenderer(renderer_);
 				renderer_ = other.renderer_;
@@ -26,7 +26,7 @@ namespace SDL {
 		}
 		
 		Renderer& operator=(const Renderer&) = delete;
-		Renderer& operator=(Renderer&& other) {
+		Renderer& operator=(Renderer&& other)  noexcept {
 			if (this != &other) {
 				if (renderer_) SDL_DestroyRenderer(renderer_);
 				renderer_ = other.renderer_;
@@ -50,7 +50,7 @@ namespace SDL {
 		explicit Window(const char* title, const Vector& position, const Vector& size, Uint32 flags) noexcept;
 		
 		Window(const Window&) = delete;
-		Window(Window&& other) {
+		Window(Window&& other)  noexcept {
 			if (this != &other) {
 				if (window_) SDL_DestroyWindow(window_);
 				window_ = other.window_;
@@ -59,7 +59,7 @@ namespace SDL {
 		}
 		
 		Window& operator=(const Window&) = delete;
-		Window& operator=(Window&& other) {
+		Window& operator=(Window&& other)  noexcept {
 			if (this != &other) {
 				if (window_) SDL_DestroyWindow(window_);
 				window_ = other.window_;
@@ -74,10 +74,51 @@ namespace SDL {
 	private:
 		SDL_Window* window_;
 	};
+
+	class RendererWindow {
+	public:
+	    explicit RendererWindow(const char* title, const Vector& position, const Vector& size, Uint32 window_flags,
+                             int index, Uint32 renderer_flags) noexcept;
+	    RendererWindow(const RendererWindow&) = delete;
+	    RendererWindow(RendererWindow&& other) noexcept {
+	        if (this != &other) {
+	            if (window_) SDL_DestroyWindow(window_);
+	            if (renderer_) SDL_DestroyRenderer(renderer_);
+	            window_ = other.window_;
+	            renderer_ = other.renderer_;
+	            other.window_ = nullptr;
+	            other.renderer_ = nullptr;
+	        }
+	    }
+
+        RendererWindow& operator=(const RendererWindow&) = delete;
+        RendererWindow& operator=(RendererWindow&& other)  noexcept {
+            if (this != &other) {
+                if (window_) SDL_DestroyWindow(window_);
+                if (renderer_) SDL_DestroyRenderer(renderer_);
+                window_ = other.window_;
+                renderer_ = other.renderer_;
+                other.window_ = nullptr;
+                other.renderer_ = nullptr;
+            }
+            return *this;
+        }
+
+        void SetColor(const Color& color);
+        void Draw(Object& object);
+        void Update();
+        void Clear();
+
+        SDL_Window* WindowPtr();
+        SDL_Renderer* RendererPtr();
+	private:
+	    SDL_Window* window_;
+	    SDL_Renderer* renderer_;
+	};
 	
 	inline void Delay(Uint32 ms) {
-		SDL_Delay(ms);
-	}
+        SDL_Delay(ms);
+    }
 }
 
 #endif

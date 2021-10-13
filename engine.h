@@ -17,7 +17,9 @@
 
 class Engine {
 public:
-	Engine(): window(SDL::Window("Window", SDL::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED), SDL::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN)), renderer(SDL::Renderer(window.Ptr(), -1, SDL_RENDERER_ACCELERATED)) { } 
+	Engine(): window("Window", SDL::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED),
+                  SDL::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN,
+                  -1, SDL_RENDERER_ACCELERATED) { }
 	~Engine() {
 		SDL_Quit();
 	}
@@ -49,9 +51,7 @@ public:
 		}
 	}
 private:
-	
-	SDL::Window window;
-	SDL::Renderer renderer;
+	SDL::RendererWindow window;
 };
 
 #endif

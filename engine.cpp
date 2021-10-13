@@ -9,12 +9,12 @@
 //To load objects use objects = file.Load();
 
 void Engine::Start() { // Here you can create start Objects and Colliders
-	renderer.SetColor(SDL::Color(225, 255, 255));
-	renderer.Clear();
-	renderer.SetColor(SDL::Color(0, 0, 0));
+	window.SetColor(SDL::Color(225, 255, 255));
+    window.Clear();
+    window.SetColor(SDL::Color(0, 0, 0));
 	SDL::File file("Object.object");
 	std::vector<std::shared_ptr<SDL::Object>> objects = file.Load();
-	for (std::shared_ptr<SDL::Object> obj : objects) if (obj) renderer.Draw(*obj);
+	for (std::shared_ptr<SDL::Object> obj : objects) if (obj) window.Draw(*obj);
 	SDL::File file2("test.object");
 	file2.Save(objects);
 	std::unique_ptr<Functions::Function> function = Functions::Parser::Parse("sinx");
@@ -23,10 +23,10 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 		float y = function->Calculate(x);
 		if (y > HEIGHT / 2) continue;
 		std::shared_ptr<SDL::Shapes::Point> p = std::make_shared<SDL::Shapes::Point>(SDL::Vector(x * 2 + WIDTH / 2, -1 * y * 20 + HEIGHT / 2));
-		p->Draw(renderer.Ptr());
+		p->Draw(window.RendererPtr());
 	}
-	
-	renderer.Update();
+
+    window.Update();
 }
 
 void Engine::Update() { // Gameplay and Physics

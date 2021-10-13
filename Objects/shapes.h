@@ -24,9 +24,7 @@ namespace SDL {
 	public:
 		Object(const Vector& position, const Vector& size) :
 			position_(position), size_(size) {}
-		virtual ~Object() {
-			
-		}
+		virtual ~Object() = default;
 		
 		
 		Vector GetPosition() const;

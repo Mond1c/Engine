@@ -31,4 +31,13 @@ namespace SDL {
 		v1.x -= v2.x; v1.y -= v2.y;
 		return v1;
 	}
+
+    inline Vector operator*(const Vector& v1, int factor) {
+        return Vector(v1.x * factor, v1.y * factor);
+    }
+
+    inline Vector& operator*=(Vector& v1, int factor) {
+        v1.x *= factor; v1.y *= factor;
+        return v1;
+    }
 }
