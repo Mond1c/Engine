@@ -3,7 +3,7 @@
 // Created by Mihail Kornilovich on 22.08.2021.
 
 #include "window.h"
-using namespace SDL;
+using namespace engine;
 
 Renderer::Renderer(SDL_Window* window, int index, Uint32 flags) noexcept {
 	renderer_ = SDL_CreateRenderer(window, index, flags);

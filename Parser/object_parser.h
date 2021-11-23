@@ -10,7 +10,7 @@
 #include <vector>
 #include <memory>
 
-namespace SDL {
+namespace engine {
 	class Parser {
 	public:
 		Parser() = delete;
@@ -20,7 +20,7 @@ namespace SDL {
 		Parser& operator=(const Parser&) = delete;
 		Parser& operator=(Parser&&) = delete;
 		
-		static std::shared_ptr<SDL::Object> Parse(std::stringstream& stream);
+		static std::shared_ptr<engine::Object> Parse(std::stringstream& stream);
 		static std::vector<std::string> Split(const std::string& str);
 	};
 }

@@ -3,22 +3,22 @@
 // Created by Mihail Kornilovich on 22.08.2021.
 
 #include "collider.h"
-using namespace Physics;
-using namespace Collider;
+using namespace engine;
+using namespace collider;
 
-SDL::Vector ICollider::GetPosition() const {
+Vector ICollider::GetPosition() const {
 	return position_;
 }
 
-SDL::Vector ICollider::GetSize() const {
+Vector ICollider::GetSize() const {
 	return size_;
 }
 
-SDL::Vector ICollider::GetSpeed() const {
+Vector ICollider::GetSpeed() const {
 	return speed_;
 }
 
-void ICollider::SetSpeed(const SDL::Vector& speed) {
+void ICollider::SetSpeed(const Vector& speed) {
 	speed_ = speed;
 }
 
@@ -39,11 +39,11 @@ void ICollider::Update(std::vector<ICollider*>& objects) {
 }
 
 namespace {
-	inline bool DetectCollision(const Collider::Rect& r1, const Collider::Rect& r2) {
-		SDL::Vector p1 = r1.GetPosition();
-		SDL::Vector s1 = r1.GetSize();
-		SDL::Vector p2 = r2.GetPosition();
-		SDL::Vector s2 = r2.GetSize();
+	inline bool DetectCollision(const collider::Rect& r1, const collider::Rect& r2) {
+		Vector p1 = r1.GetPosition();
+		Vector s1 = r1.GetSize();
+		Vector p2 = r2.GetPosition();
+		Vector s2 = r2.GetSize();
 		
 		return  p1.x < p2.x + s2.x &&
 				p1.x + s1.x > p2.x &&
@@ -51,8 +51,8 @@ namespace {
 				p1.y + s1.y > p2.y;
 	}
 	
-	inline bool DetectCollision(const Collider::Rect& r, const Collider::Circle& c) {
-		SDL::Vector center_vector = c.GetPosition() - r.GetPosition();
+	inline bool DetectCollision(const collider::Rect& r, const collider::Circle& c) {
+		Vector center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -64,8 +64,8 @@ namespace {
 		return dist_x * dist_x + dist_y * dist_y < (radius * radius + 1e-3);
 	}
 	
-	inline bool DetectCollision(const Collider::Rect& r, const Collider::Circumference& c) {
-		SDL::Vector center_vector = c.GetPosition() - r.GetPosition();
+	inline bool DetectCollision(const collider::Rect& r, const collider::Circumference& c) {
+		Vector center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -77,8 +77,8 @@ namespace {
 		return dist_x * dist_x + dist_y * dist_y < (radius * radius + 1e-3);
 	}
 	
-	inline bool DetectCollision(const Collider::Circle& c, const Collider::Rect& r) {
-		SDL::Vector center_vector = c.GetPosition() - r.GetPosition();
+	inline bool DetectCollision(const collider::Circle& c, const collider::Rect& r) {
+		Vector center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -90,8 +90,8 @@ namespace {
 		return dist_x * dist_x + dist_y * dist_y < (radius * radius + 1e-3);
 	}
 	
-	inline bool DetectCollision(const Collider::Circumference& c, const Collider::Rect& r) {
-		SDL::Vector center_vector = c.GetPosition() - r.GetPosition();
+	inline bool DetectCollision(const collider::Circumference& c, const collider::Rect& r) {
+		Vector center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -103,32 +103,32 @@ namespace {
 		return dist_x * dist_x + dist_y * dist_y < (radius * radius + 1e-3);
 	}
 	
-	inline bool DetectCollision(const Collider::Circle& c1, const Collider::Circle& c2) {
-		SDL::Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+	inline bool DetectCollision(const collider::Circle& c1, const collider::Circle& c2) {
+		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
 		return dx * dx + dy * dy < (r1 + r2) * (r1 + r2);
 	}
 	
-	inline bool DetectCollision(const Collider::Circle& c1, const Collider::Circumference& c2) {
-		SDL::Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+	inline bool DetectCollision(const collider::Circle& c1, const collider::Circumference& c2) {
+		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
 		return dx * dx + dy * dy < (r1 + r2) * (r1 + r2);
 	}
 	
-	inline bool DetectCollision(const Collider::Circumference& c1, const Collider::Circle& c2) {
-		SDL::Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+	inline bool DetectCollision(const collider::Circumference& c1, const collider::Circle& c2) {
+		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
 		return dx * dx + dy * dy < (r1 + r2) * (r1 + r2);
 	}
 	
-	inline bool DetectCollision(const Collider::Circumference& c1, const Collider::Circumference& c2) {
-		SDL::Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+	inline bool DetectCollision(const collider::Circumference& c1, const collider::Circumference& c2) {
+		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
@@ -136,6 +136,6 @@ namespace {
 	}
 }
 
-inline bool Physics::DetectCollision(const ICollider& c1, const ICollider& c2) {
+inline bool engine::DetectCollision(const ICollider& c1, const ICollider& c2) {
 	return ::DetectCollision(c1, c2);
 }

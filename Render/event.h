@@ -8,7 +8,7 @@
 
 #include <SDL.h>
 
-namespace SDL {
+namespace engine {
 	enum EventType {
 		FIRST = SDL_FIRSTEVENT,     /**< Unused (do not remove) */
 		

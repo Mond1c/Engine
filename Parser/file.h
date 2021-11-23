@@ -10,7 +10,7 @@
 #include <fstream>
 #include <vector>
 
-namespace SDL {
+namespace engine {
 	class File {
 	public:
 		File(const char* file_name) : file_name_(file_name) {}
@@ -34,8 +34,8 @@ namespace SDL {
 		}
 
 		
-		std::vector<std::shared_ptr<SDL::Object>> Load();
-		void Save(std::vector<std::shared_ptr<SDL::Object>> objects);
+		std::vector<std::shared_ptr<engine::Object>> Load();
+		void Save(std::vector<std::shared_ptr<engine::Object>> objects);
 	private:
 		const char* file_name_;
 	};

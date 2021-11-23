@@ -3,7 +3,7 @@
 // Created by Mihail Kornilovich on 22.08.2021.
 
 #include "event.h"
-using namespace SDL;
+using namespace engine;
 
 bool Event::PollEvent() {
 	return SDL_PollEvent(&event_);

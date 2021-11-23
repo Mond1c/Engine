@@ -5,8 +5,8 @@
 #include "shapes.h"
 #include "../Parser/object_parser.h"
 #include <cmath>
-using namespace SDL;
-using namespace Shapes;
+using namespace engine;
+using namespace shapes;
 
 
 const Vector& Object::GetPosition() const {

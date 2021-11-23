@@ -9,7 +9,7 @@
 #include <SDL.h>
 
 
-namespace SDL {
+namespace engine {
 	
 	class Renderer {
 	public:

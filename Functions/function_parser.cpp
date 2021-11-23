@@ -6,7 +6,7 @@
 #include <cmath>
 #include <algorithm>
 
-using namespace Functions;
+using namespace functions;
 
 double Token::Number::Calculate(double x) const {
 	return number;

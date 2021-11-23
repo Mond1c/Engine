@@ -1,6 +1,6 @@
 #include <cmath>
 
-namespace SDL {
+namespace engine {
 
 	struct Vector {
 		float x;

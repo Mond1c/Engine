@@ -13,7 +13,7 @@
 #include <vector>
 
 
-namespace SDL {	
+namespace engine {
 	struct Color {
 		Uint8 r, g, b, a;
 		explicit Color(Uint8 r = 0, Uint8 g = 0, Uint8 b = 0, Uint8 a = 255) :
@@ -41,7 +41,7 @@ namespace SDL {
 		Vector size_;
 	};
 	
-	namespace Shapes {
+	namespace shapes {
 		
 		class Point : public Object {
 		public:

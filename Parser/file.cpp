@@ -3,7 +3,7 @@
 // Created by Mihail Kornilovich on 23.08.2021.
 
 #include "file.h"
-using namespace SDL;
+using namespace engine;
 
 std::vector<std::shared_ptr<Object>> File::Load() {
 	std::fstream file(file_name_);

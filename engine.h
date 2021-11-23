@@ -17,8 +17,8 @@
 
 class Engine {
 public:
-	Engine(): window("Window", SDL::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED),
-                  SDL::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN,
+	Engine(): window("Window", engine::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED),
+                  engine::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN,
                   -1, SDL_RENDERER_ACCELERATED) { }
 	~Engine() {
 		SDL_Quit();
@@ -39,19 +39,25 @@ public:
 	void Update();
 	
 	void Game() {
-		while (true) {
+        bool running = true;
+		while (running) {
+            Uint64 start = SDL_GetPerformanceCounter();
 			Update();
-			SDL::Event event;
-			if (event.PollEvent()) {
-				if (event.Type() == SDL::EventType::QUIT) {
-					break;
-				}
-			}
-			SDL::Delay(DELAY);
+			engine::Event event;
+			while (event.PollEvent()) {
+                if (event.Type() == engine::EventType::QUIT) {
+                    running = false;
+                }
+            }
+            engine::Delay(DELAY);
+            Uint64 end = SDL_GetPerformanceCounter();
+            float fps = (end - start) / (float)SDL_GetPerformanceFrequency();
+            std::cout << 1 / fps << std::endl;
+            window.Update();
 		}
 	}
 private:
-	SDL::RendererWindow window;
+	engine::RendererWindow window;
 };
 
 #endif

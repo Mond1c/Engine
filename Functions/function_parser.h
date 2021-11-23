@@ -10,7 +10,7 @@
 #include <vector>
 #include <memory>
 
-namespace Functions {
+namespace functions {
 	struct IToken {
 		double number;
 		
