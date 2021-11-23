@@ -14,7 +14,9 @@ namespace SDL {
 	class Renderer {
 	public:
 		explicit Renderer(SDL_Window* window, int index, Uint32 flags) noexcept;
-		~Renderer();
+		~Renderer() {
+            SDL_DestroyRenderer(renderer_);
+        }
 		
 		Renderer(const Renderer&) = delete;
 		Renderer(Renderer&& other)  noexcept {
@@ -57,6 +59,9 @@ namespace SDL {
 				other.window_ = nullptr;
 			}
 		}
+        ~Window() {
+            SDL_DestroyWindow(window_);
+        }
 		
 		Window& operator=(const Window&) = delete;
 		Window& operator=(Window&& other)  noexcept {
@@ -69,8 +74,7 @@ namespace SDL {
 		}
 		
 		SDL_Window* Ptr();
-		
-		~Window();
+
 	private:
 		SDL_Window* window_;
 	};
@@ -90,6 +94,11 @@ namespace SDL {
 	            other.renderer_ = nullptr;
 	        }
 	    }
+
+        ~RendererWindow() {
+            SDL_DestroyRenderer(renderer_);
+            SDL_DestroyWindow(window_);
+        }
 
         RendererWindow& operator=(const RendererWindow&) = delete;
         RendererWindow& operator=(RendererWindow&& other)  noexcept {

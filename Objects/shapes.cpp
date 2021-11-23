@@ -8,14 +8,12 @@
 using namespace SDL;
 using namespace Shapes;
 
-#define _USE_MATH_DEFINES
 
-
-Vector Object::GetPosition() const {
+const Vector& Object::GetPosition() const {
 	return position_;
 }
 
-Vector Object::GetSize() const {
+const Vector& Object::GetSize() const {
 	return size_;
 }
 
@@ -149,7 +147,7 @@ namespace {
 	}
 }
 
-void Trinagle::Draw(SDL_Renderer* renderer) {	
+void Triangle::Draw(SDL_Renderer* renderer) {
 	float start_x = std::fminf(position_.x, std::fminf(second_point_.x, third_point_.x));
 	float start_y = std::fminf(position_.y, std::fminf(second_point_.y, third_point_.y));
 	float finish_x = std::fmaxf(position_.x, std::fmaxf(second_point_.x, third_point_.x));
@@ -168,13 +166,13 @@ void Trinagle::Draw(SDL_Renderer* renderer) {
 	}
 }
 
-std::string Trinagle::GetString() const {
+std::string Triangle::GetString() const {
 	return  "type=trinagle\nposition=" + std::to_string(position_.x) + "," + std::to_string(position_.y) + '\n'
 			+ "position=" + std::to_string(second_point_.x) + "," + std::to_string(second_point_.y) + '\n' 
 			+ "position=" + std::to_string(third_point_.x) + "," + std::to_string(third_point_.y) + '\n';	
 }
 
-void Trinagle::StringToObject(std::stringstream& ss) {
+void Triangle::StringToObject(std::stringstream& ss) {
 	std::string str;
 	int state = 0;
 	while (ss >> str) {
@@ -233,8 +231,8 @@ void Polygon::Draw(SDL_Renderer* renderer) {
 
 std::string Polygon::GetString() const {
 	std::string ans="type=polygon";
-	for (int i = 0; i < points_.size(); ++i) {
-		ans += "\nposition=" + std::to_string(points_[i].x) + "," + std::to_string(points_[i].y);
+	for (auto point : points_) {
+		ans += "\nposition=" + std::to_string(point.x) + "," + std::to_string(point.y);
 	}
 	return ans;
 }
@@ -243,6 +241,6 @@ void Polygon::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		points_.push_back({std::stof(elements[1]), std::stof(elements[2])});
+		points_.emplace_back(std::stof(elements[1]), std::stof(elements[2]));
 	}
 }

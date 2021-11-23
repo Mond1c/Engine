@@ -4,8 +4,6 @@
 #include "engine.h"
 #include <iostream>
 
-//To create object use CreateObject(Object*);
-//To create collider use CreateCollider(ICollider*)
 //To load objects use objects = file.Load();
 
 void Engine::Start() { // Here you can create start Objects and Colliders
@@ -13,16 +11,16 @@ void Engine::Start() { // Here you can create start Objects and Colliders
     window.Clear();
     window.SetColor(SDL::Color(0, 0, 0));
 	SDL::File file("Object.object");
-	std::vector<std::shared_ptr<SDL::Object>> objects = file.Load();
-	for (std::shared_ptr<SDL::Object> obj : objects) if (obj) window.Draw(*obj);
+	auto objects = file.Load();
+	for (const auto& obj : objects) if (obj) window.Draw(*obj);
 	SDL::File file2("test.object");
 	file2.Save(objects);
-	std::unique_ptr<Functions::Function> function = Functions::Parser::Parse("sinx");
+	auto function = Functions::Parser::Parse("sinx");
 	
-	for (float x = -WIDTH / 2; x < WIDTH / 2; x += 0.05f) {
+	for (float x = (float)-WIDTH / 2; x < (float)WIDTH / 2; x += 0.05) {
 		float y = function->Calculate(x);
-		if (y > HEIGHT / 2) continue;
-		std::shared_ptr<SDL::Shapes::Point> p = std::make_shared<SDL::Shapes::Point>(SDL::Vector(x * 2 + WIDTH / 2, -1 * y * 20 + HEIGHT / 2));
+		if (y > (float)HEIGHT / 2) continue;
+		auto p = std::make_shared<SDL::Shapes::Point>(SDL::Vector(x * 2 + WIDTH / 2, -1 * y * 20 + HEIGHT / 2));
 		p->Draw(window.RendererPtr());
 	}
 

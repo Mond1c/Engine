@@ -9,14 +9,14 @@
 #include "vector.h"
 #include <SDL.h>
 #include <iostream>
+#include <utility>
 #include <vector>
 
 
 namespace SDL {	
 	struct Color {
 		Uint8 r, g, b, a;
-		Color() : r(0), g(0), b(0), a(255) {}
-		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) :
+		explicit Color(Uint8 r = 0, Uint8 g = 0, Uint8 b = 0, Uint8 a = 255) :
 			r(r), g(g), b(b), a(a) {}
 	};
 	
@@ -27,13 +27,13 @@ namespace SDL {
 		virtual ~Object() = default;
 		
 		
-		Vector GetPosition() const;
-		Vector GetSize() const;
+		[[nodiscard]] const Vector& GetPosition() const;
+		[[nodiscard]] const Vector& GetSize() const;
 		
 		void SetPosition(const Vector& position);
 		
 		virtual void Draw(SDL_Renderer* renderer) = 0;
-		virtual std::string GetString() const = 0;
+		[[nodiscard]] virtual std::string GetString() const = 0;
 		
 		virtual void StringToObject(std::stringstream& ss) = 0;
 	protected:
@@ -45,22 +45,22 @@ namespace SDL {
 		
 		class Point : public Object {
 		public:
-			Point(const Vector& position) :
+			explicit Point(const Vector& position) :
 			Object(position, {1, 1}) {}
-			~Point() {}
+			~Point() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		};
 		
 		class Line : public Object {
 		public:
 			Line(const Vector& start, const Vector& finish) : Object(start, {finish.x - start.x, 1}), finish(finish) {}
-			~Line() {}
+			~Line() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
 			Vector finish;
@@ -71,45 +71,45 @@ namespace SDL {
 			Rect(const Vector& position, const Vector& size) : Object(position, size) {
 				rect_ = {position.x, position.y, position.x + size.x, position.y + size.y};
 			}
-			~Rect() {}
+			~Rect() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
 			void Fill(SDL_Renderer* renderer);
 			
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
-			SDL_FRect rect_;
+			SDL_FRect rect_{};
 		};
 		
 		class Circle : public Object {
 		public:
 			Circle(const Vector& position, const Vector& size) : Object(position, size) {}
-			~Circle() {}
+			~Circle() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		};
 		
 		class Circumference : public Object {
 		public:
 			Circumference(const Vector& position, const Vector& size) : Object(position, size) {}
-			~Circumference() {}
+			~Circumference() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		};
 		
-		class Trinagle : public Object {
+		class Triangle : public Object {
 		public:
-			Trinagle(const Vector& first_point, const Vector& second_point, const Vector& third_point) : 
+			Triangle(const Vector& first_point, const Vector& second_point, const Vector& third_point) :
 			Object(first_point, {0, 0}), second_point_(second_point), third_point_(third_point) {}
-			~Trinagle() {}
+			~Triangle() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
 			Vector second_point_;
@@ -118,11 +118,11 @@ namespace SDL {
 		
 		class Polygon : public Object {
 		public:
-			Polygon(const std::vector<Vector>& points) : Object({0, 0}, {0, 0}), points_(points) {}
-			~Polygon() {}
+			explicit Polygon(std::vector<Vector>  points) : Object({0, 0}, {0, 0}), points_(std::move(points)) {}
+			~Polygon() override = default;
 		
 			void Draw(SDL_Renderer* renderer) override;
-			std::string GetString() const override;
+			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
 			std::vector<Vector> points_;

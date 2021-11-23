@@ -78,6 +78,8 @@ namespace SDL {
 	class Event {
 	public:
 		Event() = default;
+        ~Event() = default;
+    public:
 		bool PollEvent();
 		
 		Event(const Event&) = delete;
@@ -86,7 +88,7 @@ namespace SDL {
 		Event& operator=(const Event&) = delete;
 		Event& operator=(Event&&) = delete;
 		
-		Uint32 Type() const;
+		[[nodiscard]] Uint32 Type() const;
 	private:
 		SDL_Event event_;
 	};

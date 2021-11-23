@@ -15,11 +15,11 @@ namespace SDL {
 	};
 	
 	inline Vector operator+(const Vector& v1, const Vector& v2) {
-		return Vector(v1.x + v2.x, v1.y + v2.y);
+		return {v1.x + v2.x, v1.y + v2.y};
 	}
 	
 	inline Vector operator-(const Vector& v1, const Vector& v2) {
-		return Vector(v1.x - v2.x, v1.y - v2.y);
+		return {v1.x - v2.x, v1.y - v2.y};
 	}
 	
 	inline Vector& operator+=(Vector& v1, const Vector& v2) {
@@ -32,12 +32,21 @@ namespace SDL {
 		return v1;
 	}
 
-    inline Vector operator*(const Vector& v1, int factor) {
-        return Vector(v1.x * factor, v1.y * factor);
+    inline Vector operator*(const Vector& v1, float factor) {
+        return {v1.x * factor, v1.y * factor};
     }
 
-    inline Vector& operator*=(Vector& v1, int factor) {
+    inline Vector& operator*=(Vector& v1, float factor) {
         v1.x *= factor; v1.y *= factor;
+        return v1;
+    }
+
+    inline Vector operator/(const Vector& v1, float factor) {
+        return {v1.x / factor, v1.y / factor};
+    }
+
+    inline Vector& operator/=(Vector& v1, float factor) {
+        v1.x /= factor; v1.y /= factor;
         return v1;
     }
 }

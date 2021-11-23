@@ -9,10 +9,6 @@ Renderer::Renderer(SDL_Window* window, int index, Uint32 flags) noexcept {
 	renderer_ = SDL_CreateRenderer(window, index, flags);
 }
 
-Renderer::~Renderer() {
-	SDL_DestroyRenderer(renderer_);
-}
-
 void Renderer::Draw(Object& object) {
 	object.Draw(renderer_);
 }
@@ -37,9 +33,6 @@ Window::Window(const char* title, const Vector& position, const Vector& size, Ui
 	window_ = SDL_CreateWindow(title, position.x, position.y, size.x, size.y, flags);
 }
 	
-Window::~Window() {
-	SDL_DestroyWindow(window_);
-}
 
 SDL_Window* Window::Ptr() {
 	return window_;

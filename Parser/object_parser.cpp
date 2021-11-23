@@ -35,7 +35,7 @@ std::shared_ptr<Object> Parser::Parse(std::stringstream& stream) {
 		circumference->StringToObject(stream);
 	}
 	if (type == "trinagle") {
-		std::shared_ptr<Shapes::Trinagle> trinagle = std::make_shared<Shapes::Trinagle>(Vector(0, 0), Vector(0, 0), Vector(0, 0));
+		std::shared_ptr<Shapes::Triangle> trinagle = std::make_shared<Shapes::Triangle>(Vector(0, 0), Vector(0, 0), Vector(0, 0));
 		trinagle->StringToObject(stream);
 		return trinagle;
 	}
