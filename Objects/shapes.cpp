@@ -9,15 +9,15 @@ using namespace engine;
 using namespace shapes;
 
 
-const Vector& Object::GetPosition() const {
+const Vector2f& Object::GetPosition() const {
 	return position_;
 }
 
-const Vector& Object::GetSize() const {
+const Vector2f& Object::GetSize() const {
 	return size_;
 }
 
-void Object::SetPosition(const Vector& position) {
+void Object::SetPosition(const Vector2f& position) {
 	position_ = position;
 }
 
@@ -137,12 +137,12 @@ void Circumference::StringToObject(std::stringstream& ss) {
 
 namespace {
 	// Вычисляет положение точки D(xd,yd) относительно прямой AB
-	double g(const Vector& a, const Vector& b, const Vector& d) {
+	double g(const Vector2f& a, const Vector2f& b, const Vector2f& d) {
 		return (d.x - a.x) * (b.y - a.y) - (d.y - a.y) * (b.x - a.x);
 	}
 	
 	// Лежат ли точки C и D с одной стороны прямой (AB)?
-	bool f(const Vector& a, const Vector& b, const Vector& c, const Vector& d) {
+	bool f(const Vector2f& a, const Vector2f& b, const Vector2f& c, const Vector2f& d) {
 		return g(a, b, c) * g(a, b, d) >= 0;
 	}
 }
@@ -155,10 +155,10 @@ void Triangle::Draw(SDL_Renderer* renderer) {
 	
 	for (float y0 = start_y; y0 <= finish_y; ++y0) {
 		for (float x0 = start_x; x0 <= finish_x; ++x0) {
-			Vector a = position_;
-			Vector b = second_point_;
-			Vector c = third_point_;
-			Vector d = Vector(x0, y0);
+            Vector2f a = position_;
+            Vector2f b = second_point_;
+            Vector2f c = third_point_;
+            Vector2f d = Vector2f(x0, y0);
 			if (f(a,b,c,d) && f(b,c,a,d) && f(c,a,b,d)) {
 				SDL_RenderDrawPointF(renderer, x0, y0);
 			}
@@ -185,7 +185,7 @@ void Triangle::StringToObject(std::stringstream& ss) {
 }
 
 namespace {
-	double calculateAngle(const Vector& point1, const Vector& point2) {
+	double calculateAngle(const Vector2f& point1, const Vector2f& point2) {
 		double dtheta, theta1, theta2;
 		
 		theta1 = atan2(point1.y, point1.x);
@@ -196,11 +196,11 @@ namespace {
 		return dtheta;
 	}
 	
-	bool insidePolygon(const std::vector<Vector>& points, const Vector& point) {
+	bool insidePolygon(const std::vector<Vector2f>& points, const Vector2f& point) {
 		double angle = 0;
 		for (int i = 0; i < points.size(); ++i) {
-			Vector p1(points[i].x - point.x, points[i].y - point.y);
-			Vector p2(points[(i + 1) % points.size()].x - point.x, points[(i + 1) % points.size()].y - point.y);
+            Vector2f p1(points[i].x - point.x, points[i].y - point.y);
+            Vector2f p2(points[(i + 1) % points.size()].x - point.x, points[(i + 1) % points.size()].y - point.y);
 			angle += calculateAngle(p1, p2);
 		}
 		if (abs(angle) < M_PI) return false;
@@ -213,7 +213,7 @@ void Polygon::Draw(SDL_Renderer* renderer) {
 	float x1 = MAXFLOAT, x2 = -1;
 	float y1 = MAXFLOAT, y2 = -1;
 	
-	for (const Vector& point : points_) {
+	for (const Vector2f& point : points_) {
 		x1 = std::fminf(point.x, x1);
 		x2 = std::fmaxf(point.x, x2);
 		y1 = std::fminf(point.y, y1);

@@ -17,8 +17,8 @@
 
 class Engine {
 public:
-	Engine(): window("Window", engine::Vector(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED),
-                  engine::Vector(WIDTH, HEIGHT), SDL_WINDOW_SHOWN,
+	Engine(): window("Window", engine::Vector2f(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED),
+                  engine::Vector2f(WIDTH, HEIGHT), SDL_WINDOW_SHOWN,
                   -1, SDL_RENDERER_ACCELERATED) { }
 	~Engine() {
 		SDL_Quit();
@@ -43,7 +43,7 @@ public:
 		while (running) {
             Uint64 start = SDL_GetPerformanceCounter();
 			Update();
-			engine::Event event;
+			engine::Event event{};
 			while (event.PollEvent()) {
                 if (event.Type() == engine::EventType::QUIT) {
                     running = false;
@@ -51,7 +51,7 @@ public:
             }
             engine::Delay(DELAY);
             Uint64 end = SDL_GetPerformanceCounter();
-            float fps = (end - start) / (float)SDL_GetPerformanceFrequency();
+            float fps = (float)(end - start) / (float)SDL_GetPerformanceFrequency();
             std::cout << 1 / fps << std::endl;
             window.Update();
 		}

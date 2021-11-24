@@ -13,21 +13,21 @@
 namespace engine {
 	class ICollider {
 	public:
-		ICollider(const engine::Vector& position, const engine::Vector& size, engine::Object& object, double mass) :
+		ICollider(const engine::Vector2f& position, const engine::Vector2f& size, engine::Object& object, double mass) :
 			position_(position), size_(size), object_(object), mass_(mass), speed_({0, 0}) {}
 		virtual ~ICollider() {}
 		
 		void Update(std::vector<ICollider*>& objects);
 		
-		engine::Vector GetPosition() const;
-        engine::Vector GetSize() const;
-        engine::Vector GetSpeed() const;
+		[[nodiscard]] engine::Vector2f GetPosition() const;
+        [[nodiscard]] engine::Vector2f GetSize() const;
+        [[nodiscard]] engine::Vector2f GetSpeed() const;
 		
-		void SetSpeed(const engine::Vector& speed);
+		void SetSpeed(const engine::Vector2f& speed);
 	protected:
-        engine::Vector position_;
-        engine::Vector size_;
-        engine::Vector speed_;
+        engine::Vector2f position_;
+        engine::Vector2f size_;
+        engine::Vector2f speed_;
         engine::Object& object_;
 		
 		double mass_;
@@ -36,23 +36,23 @@ namespace engine {
 	namespace collider {
 		class Rect : public ICollider {
 		public:
-			Rect(const engine::Vector& position, const engine::Vector& size, engine::shapes::Rect& object, double mass) :
+			Rect(const engine::Vector2f& position, const engine::Vector2f& size, engine::shapes::Rect& object, double mass) :
 				ICollider(position, size, object, mass) {}
-			~Rect() {}
+			~Rect() override = default;
 		};
 		
 		class Circle : public ICollider {
 		public:
-			Circle(const engine::Vector& position, const engine::Vector& size, engine::shapes::Circle& object, double mass) :
+			Circle(const engine::Vector2f& position, const engine::Vector2f& size, engine::shapes::Circle& object, double mass) :
 				ICollider(position, size, object, mass) {}
-			~Circle() {}
+			~Circle() override = default;
 		};
 		
 		class Circumference : public ICollider {
 		public:
-			Circumference(const engine::Vector& position, const engine::Vector& size, engine::shapes::Circumference& object, double mass) :
+			Circumference(const engine::Vector2f& position, const engine::Vector2f& size, engine::shapes::Circumference& object, double mass) :
 				ICollider(position, size, object, mass) {}
-			~Circumference() {}
+			~Circumference() override = default;
 		};
 	}
 	

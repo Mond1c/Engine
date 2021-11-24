@@ -49,7 +49,7 @@ namespace engine {
 	
 	class Window {
 	public:
-		explicit Window(const char* title, const Vector& position, const Vector& size, Uint32 flags) noexcept;
+		explicit Window(const char* title, const Vector2f& position, const Vector2f& size, Uint32 flags) noexcept;
 		
 		Window(const Window&) = delete;
 		Window(Window&& other)  noexcept {
@@ -81,7 +81,7 @@ namespace engine {
 
 	class RendererWindow {
 	public:
-	    explicit RendererWindow(const char* title, const Vector& position, const Vector& size, Uint32 window_flags,
+	    explicit RendererWindow(const char* title, const Vector2f& position, const Vector2f& size, Uint32 window_flags,
                              int index, Uint32 renderer_flags) noexcept;
 	    RendererWindow(const RendererWindow&) = delete;
 	    RendererWindow(RendererWindow&& other) noexcept {

@@ -29,7 +29,7 @@ SDL_Renderer* Renderer::Ptr() {
 	return renderer_;
 }
 
-Window::Window(const char* title, const Vector& position, const Vector& size, Uint32 flags) noexcept {
+Window::Window(const char* title, const Vector2f& position, const Vector2f& size, Uint32 flags) noexcept {
 	window_ = SDL_CreateWindow(title, position.x, position.y, size.x, size.y, flags);
 }
 	
@@ -38,7 +38,7 @@ SDL_Window* Window::Ptr() {
 	return window_;
 }
 
-RendererWindow::RendererWindow(const char *title, const Vector &position, const Vector &size, Uint32 window_flags,
+RendererWindow::RendererWindow(const char *title, const Vector2f &position, const Vector2f &size, Uint32 window_flags,
                                int index, Uint32 renderer_flags) noexcept {
     window_ = SDL_CreateWindow(title, position.x, position.y, size.x, size.y, window_flags);
     renderer_ = SDL_CreateRenderer(window_, index, renderer_flags);

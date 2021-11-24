@@ -6,19 +6,19 @@
 using namespace engine;
 using namespace collider;
 
-Vector ICollider::GetPosition() const {
+Vector2f ICollider::GetPosition() const {
 	return position_;
 }
 
-Vector ICollider::GetSize() const {
+Vector2f ICollider::GetSize() const {
 	return size_;
 }
 
-Vector ICollider::GetSpeed() const {
+Vector2f ICollider::GetSpeed() const {
 	return speed_;
 }
 
-void ICollider::SetSpeed(const Vector& speed) {
+void ICollider::SetSpeed(const Vector2f& speed) {
 	speed_ = speed;
 }
 
@@ -40,10 +40,10 @@ void ICollider::Update(std::vector<ICollider*>& objects) {
 
 namespace {
 	inline bool DetectCollision(const collider::Rect& r1, const collider::Rect& r2) {
-		Vector p1 = r1.GetPosition();
-		Vector s1 = r1.GetSize();
-		Vector p2 = r2.GetPosition();
-		Vector s2 = r2.GetSize();
+        Vector2f p1 = r1.GetPosition();
+        Vector2f s1 = r1.GetSize();
+        Vector2f p2 = r2.GetPosition();
+        Vector2f s2 = r2.GetSize();
 		
 		return  p1.x < p2.x + s2.x &&
 				p1.x + s1.x > p2.x &&
@@ -52,7 +52,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Rect& r, const collider::Circle& c) {
-		Vector center_vector = c.GetPosition() - r.GetPosition();
+        Vector2f center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -65,7 +65,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Rect& r, const collider::Circumference& c) {
-		Vector center_vector = c.GetPosition() - r.GetPosition();
+        Vector2f center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -78,7 +78,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Circle& c, const collider::Rect& r) {
-		Vector center_vector = c.GetPosition() - r.GetPosition();
+        Vector2f center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -91,7 +91,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Circumference& c, const collider::Rect& r) {
-		Vector center_vector = c.GetPosition() - r.GetPosition();
+        Vector2f center_vector = c.GetPosition() - r.GetPosition();
 		float rect_w = r.GetSize().x, rect_h = r.GetSize().y;
 		float radius = c.GetSize().x;
 		float dist_x = fabs(center_vector.x) - rect_w / 2;
@@ -104,7 +104,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Circle& c1, const collider::Circle& c2) {
-		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+        Vector2f pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
@@ -112,7 +112,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Circle& c1, const collider::Circumference& c2) {
-		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+        Vector2f pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
@@ -120,7 +120,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Circumference& c1, const collider::Circle& c2) {
-		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+        Vector2f pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
@@ -128,7 +128,7 @@ namespace {
 	}
 	
 	inline bool DetectCollision(const collider::Circumference& c1, const collider::Circumference& c2) {
-		Vector pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
+        Vector2f pos1 = c1.GetPosition(), pos2 = c2.GetPosition();
 		float dx = pos1.x - pos2.x;
 		float dy = pos1.y - pos2.y;
 		float r1 = c1.GetSize().x, r2 = c2.GetSize().x;
@@ -139,3 +139,4 @@ namespace {
 inline bool engine::DetectCollision(const ICollider& c1, const ICollider& c2) {
 	return ::DetectCollision(c1, c2);
 }
+

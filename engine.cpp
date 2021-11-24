@@ -10,7 +10,7 @@ using namespace shapes;
 
 class Player : public Circle {
 public:
-    Player(const Vector& position, const Vector& size, const Vector& speed) : Circle(position, size),
+    Player(const Vector2f& position, const Vector2f& size, const Vector2f& speed) : Circle(position, size),
                                                                                              speed_(speed) {}
 
     void Move() {
@@ -21,7 +21,7 @@ public:
         position_ += speed_;
     }
 private:
-    Vector speed_;
+    Vector2f speed_;
 };
 
 std::shared_ptr<Player> player;
@@ -30,7 +30,7 @@ void Engine::Start() { // Here you can create start Objects and Colliders
 	window.SetColor(Color(225, 255, 255));
     window.Clear();
     window.SetColor(Color(0, 0, 0));
-	player = std::make_shared<Player>(Vector(WIDTH / 2, HEIGHT / 2), Vector(50, 50), Vector(10, 10));
+	player = std::make_shared<Player>(Vector2f(WIDTH / 2, HEIGHT / 2), Vector2f(50, 50), Vector2f(10, 10));
 
     window.Update();
 }

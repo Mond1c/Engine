@@ -22,30 +22,30 @@ namespace engine {
 	
 	class Object {
 	public:
-		Object(const Vector& position, const Vector& size) :
+		Object(const Vector2f& position, const Vector2f& size) :
 			position_(position), size_(size) {}
 		virtual ~Object() = default;
 		
 		
-		[[nodiscard]] const Vector& GetPosition() const;
-		[[nodiscard]] const Vector& GetSize() const;
+		[[nodiscard]] const Vector2f& GetPosition() const;
+		[[nodiscard]] const Vector2f& GetSize() const;
 		
-		void SetPosition(const Vector& position);
+		void SetPosition(const Vector2f& position);
 		
 		virtual void Draw(SDL_Renderer* renderer) = 0;
 		[[nodiscard]] virtual std::string GetString() const = 0;
 		
 		virtual void StringToObject(std::stringstream& ss) = 0;
 	protected:
-		Vector position_;
-		Vector size_;
+        Vector2f position_;
+        Vector2f size_;
 	};
 	
 	namespace shapes {
 		
 		class Point : public Object {
 		public:
-			explicit Point(const Vector& position) :
+			explicit Point(const Vector2f& position) :
 			Object(position, {1, 1}) {}
 			~Point() override = default;
 			
@@ -56,19 +56,19 @@ namespace engine {
 		
 		class Line : public Object {
 		public:
-			Line(const Vector& start, const Vector& finish) : Object(start, {finish.x - start.x, 1}), finish(finish) {}
+			Line(const Vector2f& start, const Vector2f& finish) : Object(start, {finish.x - start.x, 1}), finish(finish) {}
 			~Line() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
 			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
-			Vector finish;
+            Vector2f finish;
 		};
 		
 		class Rect : public Object {
 		public:
-			Rect(const Vector& position, const Vector& size) : Object(position, size) {
+			Rect(const Vector2f& position, const Vector2f& size) : Object(position, size) {
 				rect_ = {position.x, position.y, position.x + size.x, position.y + size.y};
 			}
 			~Rect() override = default;
@@ -84,7 +84,7 @@ namespace engine {
 		
 		class Circle : public Object {
 		public:
-			Circle(const Vector& position, const Vector& size) : Object(position, size) {}
+			Circle(const Vector2f& position, const Vector2f& size) : Object(position, size) {}
 			~Circle() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
@@ -94,7 +94,7 @@ namespace engine {
 		
 		class Circumference : public Object {
 		public:
-			Circumference(const Vector& position, const Vector& size) : Object(position, size) {}
+			Circumference(const Vector2f& position, const Vector2f& size) : Object(position, size) {}
 			~Circumference() override = default;
 			
 			void Draw(SDL_Renderer* renderer) override;
@@ -104,7 +104,7 @@ namespace engine {
 		
 		class Triangle : public Object {
 		public:
-			Triangle(const Vector& first_point, const Vector& second_point, const Vector& third_point) :
+			Triangle(const Vector2f& first_point, const Vector2f& second_point, const Vector2f& third_point) :
 			Object(first_point, {0, 0}), second_point_(second_point), third_point_(third_point) {}
 			~Triangle() override = default;
 			
@@ -112,20 +112,20 @@ namespace engine {
 			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
-			Vector second_point_;
-			Vector third_point_;
+            Vector2f second_point_;
+            Vector2f third_point_;
 		};
 		
 		class Polygon : public Object {
 		public:
-			explicit Polygon(std::vector<Vector>  points) : Object({0, 0}, {0, 0}), points_(std::move(points)) {}
+			explicit Polygon(std::vector<Vector2f>  points) : Object({0, 0}, {0, 0}), points_(std::move(points)) {}
 			~Polygon() override = default;
 		
 			void Draw(SDL_Renderer* renderer) override;
 			[[nodiscard]] std::string GetString() const override;
 			void StringToObject(std::stringstream& ss) override;
 		private:
-			std::vector<Vector> points_;
+			std::vector<Vector2f> points_;
 		};
 	}
 }
