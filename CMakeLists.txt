@@ -3,7 +3,7 @@ project(Engine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-find_package(SDL2 REQUIRED SDL2)
+find_package(SDL2 REQUIRED)
 
 include_directories(.)
 include_directories(Functions)
@@ -33,4 +33,4 @@ add_executable(Engine
         main.cpp
         settings.h)
 
-target_link_libraries(Engine PRIVATE SDL2::SDL2)
+target_link_libraries(Engine SDL2::SDL2)
