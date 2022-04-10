@@ -7,15 +7,16 @@
 #define _collider_h_
 
 #include "../Objects/shapes.h"
+#include "component.h"
 #include "../settings.h"
 #include <vector>
 
 namespace engine {
-	class ICollider {
+	class ICollider : public IComponent {
 	public:
 		ICollider(const engine::Vector2f& position, const engine::Vector2f& size, engine::Object& object, double mass) :
 			position_(position), size_(size), object_(object), mass_(mass), speed_({0, 0}) {}
-		virtual ~ICollider() {}
+		virtual ~ICollider() = default;
 		
 		void Update(std::vector<ICollider*>& objects);
 		

@@ -52,7 +52,7 @@ public:
             engine::Delay(DELAY);
             Uint64 end = SDL_GetPerformanceCounter();
             float fps = (float)(end - start) / (float)SDL_GetPerformanceFrequency();
-            std::cout << 1 / fps << std::endl;
+           // std::cout << 1 / fps << std::endl;
             window.Update();
 		}
 	}

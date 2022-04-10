@@ -3,7 +3,6 @@
 // Created by Mihail Kornilovich on 23.08.2021.
 
 #include "object_parser.h"
-#include <iostream>
 using namespace engine;
 
 std::shared_ptr<Object> Parser::Parse(std::stringstream& stream) {

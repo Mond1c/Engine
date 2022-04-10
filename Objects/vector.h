@@ -7,7 +7,7 @@ namespace engine {
 		T y;
 
 		static float Length(const Vector2& p1, const Vector2& p2) {
-			return std::sqrtf((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+			return std::sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
 		} 
 		
 		Vector2(T x, T y) :
