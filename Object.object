@@ -1,9 +1,9 @@
 type=line
 position=0,500
-position=1000,500
+position=X_SIZE,500
 type=line
 position=500,0
-position=500,1000
+position=500,Y_SIZE
 type=polygon
 position=0,0
 position=30,30

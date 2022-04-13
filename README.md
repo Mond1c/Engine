@@ -3,8 +3,9 @@ This is engine
 It is based on SDL2. To use it you need rewrite CMakeLists.txt and connect to it SDL2.
 
 
-Also I created script language to create objects from file (for example, Object.objecy)
+Also I created script language to create objects from file (for example, Object.object)
 Syntax:
+
     1. Firstly, you need to indicate type of object.
     2.
         1) If type of object equals point, you need to indicate position in format "position=0,0"
