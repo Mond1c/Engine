@@ -14,6 +14,10 @@
 
 #include <vector>
 #include <memory>
+#include <future>
+
+inline std::vector<std::shared_ptr<engine::Object>> OBJECTS;
+inline std::vector<std::shared_ptr<engine::ICollider>> COLLIDERS;
 
 class Engine {
 public:
@@ -37,11 +41,18 @@ public:
 	
 	void Start();
 	void Update();
-	
+
 	void Game() {
         bool running = true;
 		while (running) {
-           // Uint64 start = SDL_GetPerformanceCounter();
+		    std::vector<std::future<void>> threads;
+		    for (const auto& object : OBJECTS) {
+		        threads.push_back(std::async(std::launch::async, &engine::RendererWindow::Draw, &window, object));
+		    }
+		    threads.clear();
+		    for (const auto& collider : COLLIDERS) {
+		        threads.push_back(std::async(std::launch::async, &engine::ICollider::Update, collider));
+		    }
 			Update();
 			engine::Event event{};
 			while (event.PollEvent()) {
@@ -54,10 +65,14 @@ public:
            // float fps = (float)(end - start) / (float)SDL_GetPerformanceFrequency();
            // std::cout << 1 / fps << std::endl;
             window.Update();
+
 		}
 	}
+
+
 private:
 	engine::RendererWindow window;
 };
+
 
 #endif

@@ -64,6 +64,7 @@ CMakeFiles/Engine.dir/Language/script.cpp.o: ../Language/script.h
 CMakeFiles/Engine.dir/Language/script.cpp.o: ../Language/token.h
 
 CMakeFiles/Engine.dir/Objects/shapes.cpp.o: ../Parser/object_parser.h
+CMakeFiles/Engine.dir/Objects/shapes.cpp.o: ../Physics/component.h
 CMakeFiles/Engine.dir/Objects/shapes.cpp.o: ../settings.h
 CMakeFiles/Engine.dir/Objects/shapes.cpp.o: ../Objects/shapes.cpp
 CMakeFiles/Engine.dir/Objects/shapes.cpp.o: ../Objects/shapes.h
@@ -120,6 +121,7 @@ CMakeFiles/Engine.dir/Objects/shapes.cpp.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/Engine.dir/Parser/file.cpp.o: ../Objects/shapes.h
 CMakeFiles/Engine.dir/Parser/file.cpp.o: ../Objects/vector.h
+CMakeFiles/Engine.dir/Parser/file.cpp.o: ../Physics/component.h
 CMakeFiles/Engine.dir/Parser/file.cpp.o: ../Parser/file.cpp
 CMakeFiles/Engine.dir/Parser/file.cpp.o: ../Parser/file.h
 CMakeFiles/Engine.dir/Parser/file.cpp.o: ../Parser/object_parser.h
@@ -175,6 +177,7 @@ CMakeFiles/Engine.dir/Parser/file.cpp.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: ../Objects/shapes.h
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: ../Objects/vector.h
+CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: ../Physics/component.h
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: ../Parser/object_parser.cpp
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: ../Parser/object_parser.h
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: /usr/include/SDL2/SDL.h
@@ -227,8 +230,14 @@ CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Functions/function_parser.h
 CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Objects/shapes.h
 CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Objects/vector.h
+CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Parser/file.h
+CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Parser/object_parser.h
+CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Render/event.h
+CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Render/window.h
+CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../engine.h
 CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../settings.h
 CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Physics/collider.cpp
 CMakeFiles/Engine.dir/Physics/collider.cpp.o: ../Physics/collider.h
@@ -335,6 +344,7 @@ CMakeFiles/Engine.dir/Render/event.cpp.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/Engine.dir/Render/event.cpp.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/Engine.dir/Render/event.cpp.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/Engine.dir/Render/window.cpp.o: ../Physics/component.h
 CMakeFiles/Engine.dir/Render/window.cpp.o: ../Objects/shapes.h
 CMakeFiles/Engine.dir/Render/window.cpp.o: ../Objects/vector.h
 CMakeFiles/Engine.dir/Render/window.cpp.o: ../Render/window.cpp

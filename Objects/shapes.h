@@ -7,10 +7,12 @@
 #define _shapes_h_
 
 #include "vector.h"
+#include "component.h"
 #include <SDL.h>
 #include <iostream>
 #include <utility>
 #include <vector>
+#include <memory>
 
 
 namespace engine {
@@ -29,7 +31,9 @@ namespace engine {
 		Object(const Vector2f& position, const Vector2f& size) :
 			position_(position), size_(size) {}
 		virtual ~Object() = default;
-		
+
+		void AddComponent(std::unique_ptr<IComponent>&& component);
+		void Update();
 		
 		[[nodiscard]] const Vector2f& GetPosition() const;
 		[[nodiscard]] const Vector2f& GetSize() const;
@@ -43,6 +47,8 @@ namespace engine {
 	protected:
         Vector2f position_;
         Vector2f size_;
+	private:
+        std::vector<std::unique_ptr<IComponent>> components_;
 	};
 	
 	namespace shapes {

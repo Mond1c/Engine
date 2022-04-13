@@ -16,9 +16,8 @@ namespace engine {
 	public:
 		ICollider(const engine::Vector2f& position, const engine::Vector2f& size, engine::Object& object, double mass) :
 			position_(position), size_(size), object_(object), mass_(mass), speed_({0, 0}) {}
-		virtual ~ICollider() = default;
-		
-		void Update(std::vector<ICollider*>& objects);
+
+		void Update() override;
 		
 		[[nodiscard]] engine::Vector2f GetPosition() const;
         [[nodiscard]] engine::Vector2f GetSize() const;

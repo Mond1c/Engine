@@ -65,6 +65,7 @@ CMakeFiles/Engine.dir/Language/script.cpp.o
  /home/kali/Desktop/Engine/Language/token.h
 CMakeFiles/Engine.dir/Objects/shapes.cpp.o
  ../Parser/object_parser.h
+ ../Physics/component.h
  ../settings.h
  /home/kali/Desktop/Engine/Objects/shapes.cpp
  /home/kali/Desktop/Engine/Objects/shapes.h
@@ -121,6 +122,7 @@ CMakeFiles/Engine.dir/Objects/shapes.cpp.o
 CMakeFiles/Engine.dir/Parser/file.cpp.o
  ../Objects/shapes.h
  ../Objects/vector.h
+ ../Physics/component.h
  /home/kali/Desktop/Engine/Parser/file.cpp
  /home/kali/Desktop/Engine/Parser/file.h
  /home/kali/Desktop/Engine/Parser/object_parser.h
@@ -176,6 +178,7 @@ CMakeFiles/Engine.dir/Parser/file.cpp.o
 CMakeFiles/Engine.dir/Parser/object_parser.cpp.o
  ../Objects/shapes.h
  ../Objects/vector.h
+ ../Physics/component.h
  /home/kali/Desktop/Engine/Parser/object_parser.cpp
  /home/kali/Desktop/Engine/Parser/object_parser.h
  /usr/include/SDL2/SDL.h
@@ -228,8 +231,14 @@ CMakeFiles/Engine.dir/Parser/object_parser.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/Engine.dir/Physics/collider.cpp.o
+ ../Functions/function_parser.h
  ../Objects/shapes.h
  ../Objects/vector.h
+ ../Parser/file.h
+ ../Parser/object_parser.h
+ ../Render/event.h
+ ../Render/window.h
+ ../engine.h
  ../settings.h
  /home/kali/Desktop/Engine/Physics/collider.cpp
  /home/kali/Desktop/Engine/Physics/collider.h
@@ -336,6 +345,7 @@ CMakeFiles/Engine.dir/Render/event.cpp.o
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
 CMakeFiles/Engine.dir/Render/window.cpp.o
+ ../Physics/component.h
  /home/kali/Desktop/Engine/Objects/shapes.h
  /home/kali/Desktop/Engine/Objects/vector.h
  /home/kali/Desktop/Engine/Render/window.cpp

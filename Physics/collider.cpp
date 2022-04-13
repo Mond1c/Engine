@@ -3,6 +3,7 @@
 // Created by Mihail Kornilovich on 22.08.2021.
 
 #include "collider.h"
+#include "engine.h"
 using namespace engine;
 using namespace collider;
 
@@ -22,9 +23,9 @@ void ICollider::SetSpeed(const Vector2f& speed) {
 	speed_ = speed;
 }
 
-void ICollider::Update(std::vector<ICollider*>& objects) {
-	for (ICollider* collider : objects) {
-		if (this != collider && DetectCollision(*this, *collider)) {
+void ICollider::Update() {
+	for (const auto& collider : COLLIDERS) {
+		if (this != collider.get() && DetectCollision(*this, *collider)) {
 			speed_.x = ((mass_ - collider->mass_) * speed_.x + 2 * collider->mass_ * collider->speed_.x) / (mass_ + collider->mass_);
 			speed_.y = ((mass_ - collider->mass_) * speed_.y + 2 * collider->mass_ * collider->speed_.y) / (mass_ + collider->mass_);
 			

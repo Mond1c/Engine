@@ -31,6 +31,16 @@ void Object::SetPosition(const Vector2f& position) {
 	position_ = position;
 }
 
+void Object::AddComponent(std::unique_ptr<IComponent> &&component) {
+    components_.push_back(std::move(component));
+}
+
+void Object::Update() {
+    for (const auto& component : components_) {
+        component->Update();
+    }
+}
+
 void Point::Draw(SDL_Renderer* renderer) {
 	SDL_RenderDrawPointF(renderer, position_.x, position_.y);
 }

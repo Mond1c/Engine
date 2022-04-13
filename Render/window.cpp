@@ -48,8 +48,8 @@ void RendererWindow::SetColor(const Color &color) {
     SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
 }
 
-void RendererWindow::Draw(Object &object) {
-    object.Draw(renderer_);
+void RendererWindow::Draw(const std::shared_ptr<Object>& object) {
+    object->Draw(renderer_);
 }
 
 void RendererWindow::Update() {

@@ -18,10 +18,7 @@ void Engine::Start() { // Here you can create start Objects and Colliders
     window.SetColor(engine::Color(0, 0, 0));
     window.Update();
     engine::File file("../Object.object");
-    auto objects = file.Load();
-    for (const auto& obj : objects) {
-        window.Draw(*obj);
-    }
+    OBJECTS = file.Load();
     auto function = functions::Parser::Parse("x^2");
     function->Draw(window.RendererPtr());
 }

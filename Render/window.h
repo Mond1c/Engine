@@ -114,7 +114,7 @@ namespace engine {
         }
 
         void SetColor(const Color& color);
-        void Draw(Object& object);
+        void Draw(const std::shared_ptr<Object>& object);
         void Update();
         void Clear();
 

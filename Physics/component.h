@@ -12,7 +12,9 @@ namespace engine {
         virtual ~IComponent() = default;
     public:
         IComponent& operator=(IComponent&) = delete;
-        IComponent& operator=(IComponent&&) = delete; 
+        IComponent& operator=(IComponent&&) = delete;
+    public:
+        virtual void Update() = 0;
     };
 }
 
