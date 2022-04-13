@@ -3,11 +3,21 @@
 // Created by Mihail Kornilovich on 22.08.2021.
 
 #include "shapes.h"
-#include "../Parser/object_parser.h"
+#include "settings.h"
+#include "object_parser.h"
 #include <cmath>
 using namespace engine;
 using namespace shapes;
 
+
+Vector2f engine::ParseVector2f(const std::string& x, const std::string& y) {
+    Vector2f vec {0, 0};
+    if (x == "X_SIZE") vec.x = WIDTH;
+    else vec.x = std::stof(x);
+    if (y == "Y_SIZE") vec.y = HEIGHT;
+    else vec.y = std::stof(y);
+    return vec;
+}
 
 const Vector2f& Object::GetPosition() const {
 	return position_;
@@ -33,7 +43,7 @@ void Point::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		position_ = {std::stof(elements[1]), std::stof(elements[2])};
+		position_ = ParseVector2f(elements[1], elements[2]);
 	}
 }
 
@@ -48,12 +58,12 @@ std::string Line::GetString() const {
 
 void Line::StringToObject(std::stringstream& ss) {
 	std::string str;
-	bool check = true;
+	bool itFirstPoint = true;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		if (check) position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else finish = {std::stof(elements[1]), std::stof(elements[2])};
-		check = false;
+		if (itFirstPoint) position_ = ParseVector2f(elements[1], elements[2]);
+		else finish = ParseVector2f(elements[1], elements[2]);
+        itFirstPoint = false;
 	}
 }
 
@@ -76,8 +86,8 @@ void Rect::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else size_ = {std::stof(elements[1]), std::stof(elements[2])};
+		if (elements[0] == "position") position_ = ParseVector2f(elements[1], elements[2]);
+		else size_ = ParseVector2f(elements[1], elements[2]);
 	}
 }
 
@@ -101,8 +111,8 @@ void Circle::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else size_ = {std::stof(elements[1]), std::stof(elements[2])};
+		if (elements[0] == "position") position_ = ParseVector2f(elements[1], elements[2]);
+		else size_ = ParseVector2f(elements[1], elements[2]);
 	}
 }
 
@@ -129,21 +139,21 @@ void Circumference::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		if (elements[0] == "position") position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else size_ = {std::stof(elements[1]), std::stof(elements[2])};
+		if (elements[0] == "position") ParseVector2f(elements[1], elements[2]);
+		else size_ = ParseVector2f(elements[1], elements[2]);
 	}
 }
 
 
 namespace {
 	// Вычисляет положение точки D(xd,yd) относительно прямой AB
-	double g(const Vector2f& a, const Vector2f& b, const Vector2f& d) {
+	double FindDPoint(const Vector2f& a, const Vector2f& b, const Vector2f& d) {
 		return (d.x - a.x) * (b.y - a.y) - (d.y - a.y) * (b.x - a.x);
 	}
-	
+
 	// Лежат ли точки C и D с одной стороны прямой (AB)?
-	bool f(const Vector2f& a, const Vector2f& b, const Vector2f& c, const Vector2f& d) {
-		return g(a, b, c) * g(a, b, d) >= 0;
+	bool CAndDOnOneSide(const Vector2f& a, const Vector2f& b, const Vector2f& c, const Vector2f& d) {
+		return FindDPoint(a, b, c) * FindDPoint(a, b, d) >= 0;
 	}
 }
 
@@ -159,7 +169,7 @@ void Triangle::Draw(SDL_Renderer* renderer) {
             Vector2f b = second_point_;
             Vector2f c = third_point_;
             Vector2f d = Vector2f(x0, y0);
-			if (f(a,b,c,d) && f(b,c,a,d) && f(c,a,b,d)) {
+			if (CAndDOnOneSide(a, b, c, d) && CAndDOnOneSide(b, c, a, d) && CAndDOnOneSide(c, a, b, d)) {
 				SDL_RenderDrawPointF(renderer, x0, y0);
 			}
 		}
@@ -174,18 +184,18 @@ std::string Triangle::GetString() const {
 
 void Triangle::StringToObject(std::stringstream& ss) {
 	std::string str;
-	int state = 0;
+	int point = 0;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		if (state == 0) position_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else if (state == 1) second_point_ = {std::stof(elements[1]), std::stof(elements[2])};
-		else third_point_ = {std::stof(elements[1]), std::stof(elements[2])};
-		++state;
+		if (point == 0) position_ = ParseVector2f(elements[1], elements[2]);
+		else if (point == 1) second_point_ = ParseVector2f(elements[1], elements[2]);
+		else third_point_ = ParseVector2f(elements[1], elements[2]);
+		++point;
 	}
 }
 
 namespace {
-	double calculateAngle(const Vector2f& point1, const Vector2f& point2) {
+	double CalculateAngle(const Vector2f& point1, const Vector2f& point2) {
 		double dtheta, theta1, theta2;
 		
 		theta1 = atan2(point1.y, point1.x);
@@ -196,12 +206,12 @@ namespace {
 		return dtheta;
 	}
 	
-	bool insidePolygon(const std::vector<Vector2f>& points, const Vector2f& point) {
+	bool InsidePolygon(const std::vector<Vector2f>& points, const Vector2f& point) {
 		double angle = 0;
 		for (int i = 0; i < points.size(); ++i) {
             Vector2f p1(points[i].x - point.x, points[i].y - point.y);
             Vector2f p2(points[(i + 1) % points.size()].x - point.x, points[(i + 1) % points.size()].y - point.y);
-			angle += calculateAngle(p1, p2);
+			angle += CalculateAngle(p1, p2);
 		}
 		if (abs(angle) < M_PI) return false;
 		return true;
@@ -222,7 +232,7 @@ void Polygon::Draw(SDL_Renderer* renderer) {
 	
 	for (float y = y1; y <= y2; ++y) {
 		for (float x = x1; x <= x2; ++x) {
-			if (insidePolygon(points_, {x, y})) {
+			if (InsidePolygon(points_, {x, y})) {
 				SDL_RenderDrawPointF(renderer, x, y);
 			}
 		}
@@ -241,6 +251,7 @@ void Polygon::StringToObject(std::stringstream& ss) {
 	std::string str;
 	while (ss >> str) {
 		std::vector<std::string> elements = Parser::Split(str);
-		points_.emplace_back(std::stof(elements[1]), std::stof(elements[2]));
+		points_.emplace_back(ParseVector2f(elements[1], elements[2]));
 	}
 }
+

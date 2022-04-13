@@ -52,6 +52,13 @@ std::vector<std::shared_ptr<IToken>>& Function::GetTokens() {
 	return tokens_;
 }
 
+void Function::Draw(SDL_Renderer *renderer) const {
+    for (double x = -WIDTH / 2; x <= WIDTH / 2; x += 0.01f) {
+        double y = -1 * Calculate(x) + HEIGHT / 2;
+        if (y >= 0 && y <= HEIGHT) SDL_RenderDrawPointF(renderer, x + WIDTH / 2, y);
+    }
+}
+
 std::unique_ptr<Function> Parser::Parse(const std::string& expression) { // x - x + 5
 	std::vector<std::string> parts = Split(expression); // {"x", "-x", "+5"}
 	
@@ -59,12 +66,12 @@ std::unique_ptr<Function> Parser::Parse(const std::string& expression) { // x - 
 	
 	Type type = GetTypeOfExpression(expression);
 	
-	if (type == Type::POWER) function = ParsePowerFunction(parts);
-	else if (type == Type::LOGARITHMIC) function = ParseLogarithmicFunction(parts);
-	else if (type == Type::SINUS) function = ParseSinusFunction(parts);
-	else if (type == Type::COSINUS) function = ParseCosinusFunction(parts);
-	else if (type == Type::TANGENS) function = ParseTangensFunction(parts);
-	else function = ParseLinearFunction(parts);
+	if (type == Type::POWER) function = ParsePower(parts);
+	else if (type == Type::LOGARITHMIC) function = ParseLogarithmic(parts);
+	else if (type == Type::SINUS) function = ParseSinus(parts);
+	else if (type == Type::COSINE) function = ParseCosine(parts);
+	else if (type == Type::TANGENT) function = ParseTangent(parts);
+	else function = ParseLinear(parts);
 	
 	return function;
 }
@@ -87,12 +94,12 @@ Parser::Type Parser::GetTypeOfExpression(const std::string& expression) {
 	if (expression.find('^') != std::string::npos) return Type::POWER;
 	if (expression.find("log") != std::string::npos) return Type::LOGARITHMIC;
 	if (expression.find("sin") != std::string::npos) return Type::SINUS;
-    if (expression.find("cos") != std::string::npos) return Type::COSINUS;
-    if (expression.find("tan") != std::string::npos) return Type::TANGENS;
+    if (expression.find("cos") != std::string::npos) return Type::COSINE;
+    if (expression.find("tan") != std::string::npos) return Type::TANGENT;
 	return Type::LINEAR;
 }
 
-std::unique_ptr<Function> Parser::ParseLinearFunction(std::vector<std::string>& expression) {
+std::unique_ptr<Function> Parser::ParseLinear(std::vector<std::string>& expression) {
 	std::unique_ptr<Function> function = std::make_unique<Function>();
 	for (const std::string& part : expression) {
 		auto it = part.find('x');
@@ -109,7 +116,7 @@ std::unique_ptr<Function> Parser::ParseLinearFunction(std::vector<std::string>& 
 	return function;
 }
 
-std::unique_ptr<Function> Parser::ParsePowerFunction(std::vector<std::string>& expreesion) {
+std::unique_ptr<Function> Parser::ParsePower(std::vector<std::string>& expreesion) {
 	std::unique_ptr<Function> function = std::make_unique<Function>();
 	for (const std::string& part : expreesion) {
 		auto it = part.find('x');
@@ -133,7 +140,7 @@ std::unique_ptr<Function> Parser::ParsePowerFunction(std::vector<std::string>& e
 	return function;
 }
 
-std::unique_ptr<Function> Parser::ParseLogarithmicFunction(std::vector<std::string>& expression) {
+std::unique_ptr<Function> Parser::ParseLogarithmic(std::vector<std::string>& expression) {
 	std::unique_ptr<Function> function = std::make_unique<Function>();
 	for (const std::string& part : expression) {
 		auto it = part.find('x');
@@ -160,7 +167,7 @@ std::unique_ptr<Function> Parser::ParseLogarithmicFunction(std::vector<std::stri
 	return function;
 }
 
-std::unique_ptr<Function> Parser::ParseSinusFunction(std::vector<std::string> &expression) {
+std::unique_ptr<Function> Parser::ParseSinus(std::vector<std::string> &expression) {
     std::unique_ptr<Function> function = std::make_unique<Function>();
     for (const std::string& part : expression) {
         auto it = part.find('x');
@@ -185,7 +192,7 @@ std::unique_ptr<Function> Parser::ParseSinusFunction(std::vector<std::string> &e
     return function;
 }
 
-std::unique_ptr<Function> Parser::ParseCosinusFunction(std::vector<std::string> &expression) {
+std::unique_ptr<Function> Parser::ParseCosine(std::vector<std::string> &expression) {
     std::unique_ptr<Function> function = std::make_unique<Function>();
     for (const std::string& part : expression) {
         auto it = part.find('x');
@@ -210,7 +217,7 @@ std::unique_ptr<Function> Parser::ParseCosinusFunction(std::vector<std::string> 
     return function;
 }
 
-std::unique_ptr<Function> Parser::ParseTangensFunction(std::vector<std::string> &expression) {
+std::unique_ptr<Function> Parser::ParseTangent(std::vector<std::string> &expression) {
     std::unique_ptr<Function> function = std::make_unique<Function>();
     for (const std::string& part : expression) {
         auto it = part.find('x');

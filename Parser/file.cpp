@@ -15,7 +15,6 @@ std::vector<std::shared_ptr<Object>> File::Load() {
 		if (str.substr(0, 4) == "type" && !obj_info.empty()) {
 			std::stringstream ss;
 			ss << obj_info;
-			//std::cout << obj_info << std::endl;
 			objects.push_back(Parser::Parse(ss));
 			obj_info.clear();
 		}
@@ -24,7 +23,6 @@ std::vector<std::shared_ptr<Object>> File::Load() {
 	if (!obj_info.empty()) {
 		std::stringstream ss;
 		ss << obj_info;
-		std::cout << obj_info << std::endl;
 		objects.push_back(Parser::Parse(ss));
 	}
 	file.close();

@@ -14,6 +14,10 @@
 
 
 namespace engine {
+
+    Vector2f ParseVector2f(const std::string& x, const std::string& y);
+
+
 	struct Color {
 		Uint8 r, g, b, a;
 		explicit Color(Uint8 r = 0, Uint8 g = 0, Uint8 b = 0, Uint8 a = 255) :
@@ -127,6 +131,7 @@ namespace engine {
 		private:
 			std::vector<Vector2f> points_;
 		};
+
 	}
 }
 

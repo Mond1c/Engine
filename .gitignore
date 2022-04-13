@@ -2,3 +2,5 @@
 .vscode/
 build/
 cmake-build-debug/
+Language/
+test.script

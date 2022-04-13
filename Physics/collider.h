@@ -6,9 +6,9 @@
 #ifndef _collider_h_
 #define _collider_h_
 
-#include "../Objects/shapes.h"
+#include "shapes.h"
 #include "component.h"
-#include "../settings.h"
+#include "settings.h"
 #include <vector>
 
 namespace engine {

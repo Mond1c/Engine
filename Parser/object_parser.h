@@ -5,7 +5,7 @@
 
 #ifndef _object_parser_h_
 #define _object_parser_h_
-#include "../Objects/shapes.h"
+#include "shapes.h"
 #include <sstream>
 #include <vector>
 #include <memory>

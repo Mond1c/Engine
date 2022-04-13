@@ -13,6 +13,11 @@ include_directories(Physics)
 include_directories(Render)
 
 add_executable(Engine
+        Language/parser.h
+        Language/parser.cpp
+        Language/script.h
+        Language/script.cpp
+        Language/token.h
         Functions/function_parser.cpp
         Functions/function_parser.h
         Objects/shapes.cpp
@@ -31,6 +36,6 @@ add_executable(Engine
         engine.cpp
         engine.h
         main.cpp
-        settings.h)
+        settings.h Language/parser.cpp Language/script.cpp)
 
 target_link_libraries(Engine SDL2::SDL2)

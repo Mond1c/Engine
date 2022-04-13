@@ -1,24 +1,22 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/elenak/Documents/SDL/Engine/Functions/function_parser.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Functions/function_parser.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/Objects/shapes.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Objects/shapes.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/Parser/file.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Parser/file.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/Parser/object_parser.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Parser/object_parser.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/Physics/collider.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Physics/collider.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/Render/event.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Render/event.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/Render/window.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Render/window.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/engine.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/engine.cpp.o"
-  "/Users/elenak/Documents/SDL/Engine/main.cpp" "/Users/elenak/Documents/SDL/Engine/cmake-build-debug/CMakeFiles/Engine.dir/main.cpp.o"
+  "/home/kali/Desktop/Engine/Functions/function_parser.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Functions/function_parser.cpp.o"
+  "/home/kali/Desktop/Engine/Language/parser.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Language/parser.cpp.o"
+  "/home/kali/Desktop/Engine/Language/script.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Language/script.cpp.o"
+  "/home/kali/Desktop/Engine/Objects/shapes.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Objects/shapes.cpp.o"
+  "/home/kali/Desktop/Engine/Parser/file.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Parser/file.cpp.o"
+  "/home/kali/Desktop/Engine/Parser/object_parser.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Parser/object_parser.cpp.o"
+  "/home/kali/Desktop/Engine/Physics/collider.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Physics/collider.cpp.o"
+  "/home/kali/Desktop/Engine/Render/event.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Render/event.cpp.o"
+  "/home/kali/Desktop/Engine/Render/window.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/Render/window.cpp.o"
+  "/home/kali/Desktop/Engine/engine.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/engine.cpp.o"
+  "/home/kali/Desktop/Engine/main.cpp" "/home/kali/Desktop/Engine/cmake-build-debug/CMakeFiles/Engine.dir/main.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
@@ -28,11 +26,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../Parser"
   "../Physics"
   "../Render"
-  "/usr/local/Cellar/sdl2/2.0.16/include/SDL2"
-  )
-
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/usr/include/SDL2"
   )
 
 # Targets to which this target links.

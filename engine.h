@@ -6,11 +6,11 @@
 #define _engine_h_
 
 #include "settings.h"
-#include "Render/window.h"
-#include "Render/event.h"
-#include "Physics/collider.h"
-#include "Parser/file.h"
-#include "Functions/function_parser.h"
+#include "window.h"
+#include "event.h"
+#include "collider.h"
+#include "file.h"
+#include "function_parser.h"
 
 #include <vector>
 #include <memory>
@@ -41,7 +41,7 @@ public:
 	void Game() {
         bool running = true;
 		while (running) {
-            Uint64 start = SDL_GetPerformanceCounter();
+           // Uint64 start = SDL_GetPerformanceCounter();
 			Update();
 			engine::Event event{};
 			while (event.PollEvent()) {
@@ -50,8 +50,8 @@ public:
                 }
             }
             engine::Delay(DELAY);
-            Uint64 end = SDL_GetPerformanceCounter();
-            float fps = (float)(end - start) / (float)SDL_GetPerformanceFrequency();
+        //    Uint64 end = SDL_GetPerformanceCounter();
+           // float fps = (float)(end - start) / (float)SDL_GetPerformanceFrequency();
            // std::cout << 1 / fps << std::endl;
             window.Update();
 		}

@@ -6,9 +6,12 @@
 #ifndef _function_parser_h_
 #define _function_parser_h_
 
+#include "settings.h"
+
 #include <string>
 #include <vector>
 #include <memory>
+#include <SDL.h>
 
 namespace functions {
 	struct IToken {
@@ -88,6 +91,7 @@ namespace functions {
 		void AddToken(std::shared_ptr<IToken> token);
 		
 		[[nodiscard]] double Calculate(double x) const;
+		void Draw(SDL_Renderer* renderer) const;
 		std::vector<std::shared_ptr<IToken>>& GetTokens();
 	private:
 		std::vector<std::shared_ptr<IToken>> tokens_;
@@ -104,18 +108,18 @@ namespace functions {
 			POWER,
 			LOGARITHMIC,
 			SINUS,
-			COSINUS,
-			TANGENS
+			COSINE,
+			TANGENT
 		};
 		
 		static Type GetTypeOfExpression(const std::string& expression);
 		
-		static std::unique_ptr<Function> ParseLinearFunction(std::vector<std::string>& expression);
-		static std::unique_ptr<Function> ParsePowerFunction(std::vector<std::string>& expression);
-		static std::unique_ptr<Function> ParseLogarithmicFunction(std::vector<std::string>& expression);
-		static std::unique_ptr<Function> ParseSinusFunction(std::vector<std::string>& expression);
-		static std::unique_ptr<Function> ParseCosinusFunction(std::vector<std::string>& expression);
-		static std::unique_ptr<Function> ParseTangensFunction(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseLinear(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParsePower(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseLogarithmic(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseSinus(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseCosine(std::vector<std::string>& expression);
+		static std::unique_ptr<Function> ParseTangent(std::vector<std::string>& expression);
 	};
 }
 #endif

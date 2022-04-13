@@ -5,160 +5,177 @@
 		<Option title="Engine"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\SDL2\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/elenak/Documents/SDL/Engine/cmake-build-debug"/>
+				<Option working_dir="/home/kali/Desktop/Engine/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/Users/elenak/Documents/SDL/Engine/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/elenak/Documents/SDL/Engine/cmake-build-debug"/>
+				<Option working_dir="/home/kali/Desktop/Engine/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/kali/Desktop/Engine/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Engine">
-				<Option output="/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Engine" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/elenak/Documents/SDL/Engine/cmake-build-debug"/>
+				<Option output="/home/kali/Desktop/Engine/cmake-build-debug/Engine" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kali/Desktop/Engine/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/."/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Functions"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Objects"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Parser"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Physics"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Render"/>
-					<Add directory="/usr/local/Cellar/sdl2/2.0.16/include/SDL2"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/home/kali/Desktop/Engine/."/>
+					<Add directory="/home/kali/Desktop/Engine/Functions"/>
+					<Add directory="/home/kali/Desktop/Engine/Objects"/>
+					<Add directory="/home/kali/Desktop/Engine/Parser"/>
+					<Add directory="/home/kali/Desktop/Engine/Physics"/>
+					<Add directory="/home/kali/Desktop/Engine/Render"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 Engine"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 Engine"/>
+					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Engine/fast">
-				<Option output="/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Engine" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/elenak/Documents/SDL/Engine/cmake-build-debug"/>
+				<Option output="/home/kali/Desktop/Engine/cmake-build-debug/Engine" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kali/Desktop/Engine/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/."/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Functions"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Objects"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Parser"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Physics"/>
-					<Add directory="/Users/elenak/Documents/SDL/Engine/Render"/>
-					<Add directory="/usr/local/Cellar/sdl2/2.0.16/include/SDL2"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/home/kali/Desktop/Engine/."/>
+					<Add directory="/home/kali/Desktop/Engine/Functions"/>
+					<Add directory="/home/kali/Desktop/Engine/Objects"/>
+					<Add directory="/home/kali/Desktop/Engine/Parser"/>
+					<Add directory="/home/kali/Desktop/Engine/Physics"/>
+					<Add directory="/home/kali/Desktop/Engine/Render"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 Engine/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/elenak/Documents/SDL/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 Engine/fast"/>
+					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/kali/Desktop/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Functions/function_parser.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Functions/function_parser.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Functions/function_parser.h">
+		<Unit filename="/home/kali/Desktop/Engine/Functions/function_parser.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Objects/shapes.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Language/parser.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Objects/shapes.h">
+		<Unit filename="/home/kali/Desktop/Engine/Language/parser.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Objects/vector.h">
+		<Unit filename="/home/kali/Desktop/Engine/Language/script.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Parser/file.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Language/script.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Parser/file.h">
+		<Unit filename="/home/kali/Desktop/Engine/Language/token.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Parser/object_parser.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Objects/shapes.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Parser/object_parser.h">
+		<Unit filename="/home/kali/Desktop/Engine/Objects/shapes.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Physics/collider.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Objects/vector.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Physics/collider.h">
+		<Unit filename="/home/kali/Desktop/Engine/Parser/file.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Render/event.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Parser/file.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Render/event.h">
+		<Unit filename="/home/kali/Desktop/Engine/Parser/object_parser.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Render/window.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Parser/object_parser.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/Render/window.h">
+		<Unit filename="/home/kali/Desktop/Engine/Physics/collider.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/engine.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Physics/collider.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/engine.h">
+		<Unit filename="/home/kali/Desktop/Engine/Render/event.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/main.cpp">
+		<Unit filename="/home/kali/Desktop/Engine/Render/event.h">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/settings.h">
+		<Unit filename="/home/kali/Desktop/Engine/Render/window.cpp">
 			<Option target="Engine"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/CMakeLists.txt">
+		<Unit filename="/home/kali/Desktop/Engine/Render/window.h">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="/home/kali/Desktop/Engine/engine.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="/home/kali/Desktop/Engine/engine.h">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="/home/kali/Desktop/Engine/main.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="/home/kali/Desktop/Engine/settings.h">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="/home/kali/Desktop/Engine/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/../../../../../usr/local/lib/cmake/SDL2/sdl2-config-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\SDL2\"/>
+		<Unit filename="/home/kali/Desktop/Engine/../../../../usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\"/>
 		</Unit>
-		<Unit filename="/Users/elenak/Documents/SDL/Engine/../../../../../usr/local/lib/cmake/SDL2/sdl2-config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\SDL2\"/>
+		<Unit filename="/home/kali/Desktop/Engine/../../../../usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

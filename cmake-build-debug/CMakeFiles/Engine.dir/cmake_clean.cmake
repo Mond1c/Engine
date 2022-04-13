@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Engine.dir/Functions/function_parser.cpp.o"
+  "CMakeFiles/Engine.dir/Language/parser.cpp.o"
+  "CMakeFiles/Engine.dir/Language/script.cpp.o"
   "CMakeFiles/Engine.dir/Objects/shapes.cpp.o"
   "CMakeFiles/Engine.dir/Parser/file.cpp.o"
   "CMakeFiles/Engine.dir/Parser/object_parser.cpp.o"
